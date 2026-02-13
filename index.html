@@ -1,0 +1,711 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+    <title>新年解签 · 马年2026</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Noto+Serif+SC:wght@400;600;700&family=Noto+Sans+SC:wght@300;400;500;600&display=swap" rel="stylesheet">
+    <style>
+        :root {
+            --red-deep: #8B0000;
+            --red-primary: #C41E3A;
+            --red-light: #E8505B;
+            --gold-primary: #D4AF37;
+            --gold-light: #F4D03F;
+            --gold-pale: #FFF8DC;
+            --bg-dark: #1a0a0a;
+            --bg-gradient: linear-gradient(180deg, #2d0a0a 0%, #1a0505 50%, #0d0202 100%);
+            --text-light: #FFF8F0;
+            --text-muted: rgba(255, 248, 240, 0.7);
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        html, body {
+            height: 100%;
+            overflow: hidden;
+        }
+
+        body {
+            font-family: 'Noto Sans SC', sans-serif;
+            background: var(--bg-gradient);
+            color: var(--text-light);
+            min-height: 100vh;
+            min-height: 100dvh;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            position: relative;
+            overflow: hidden;
+        }
+
+        /* 背景装饰 */
+        .bg-pattern {
+            position: fixed;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            pointer-events: none;
+            opacity: 0.03;
+            background-image: url("data:image/svg+xml,%3Csvg width='60' height='60' viewBox='0 0 60 60' xmlns='http://www.w3.org/2000/svg'%3E%3Cpath d='M30 5 L35 25 L55 30 L35 35 L30 55 L25 35 L5 30 L25 25 Z' fill='%23D4AF37'/%3E%3C/svg%3E");
+            background-size: 80px 80px;
+        }
+
+        /* 浮动祥云 */
+        .clouds {
+            position: fixed;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            pointer-events: none;
+            overflow: hidden;
+        }
+
+        .cloud {
+            position: absolute;
+            opacity: 0.08;
+            font-size: 4rem;
+            animation: float 20s ease-in-out infinite;
+        }
+
+        .cloud:nth-child(1) { top: 10%; left: -10%; animation-delay: 0s; }
+        .cloud:nth-child(2) { top: 30%; right: -10%; animation-delay: -5s; }
+        .cloud:nth-child(3) { bottom: 20%; left: -5%; animation-delay: -10s; }
+        .cloud:nth-child(4) { bottom: 40%; right: -5%; animation-delay: -15s; }
+
+        @keyframes float {
+            0%, 100% { transform: translateX(0) translateY(0); }
+            25% { transform: translateX(20px) translateY(-10px); }
+            50% { transform: translateX(40px) translateY(0); }
+            75% { transform: translateX(20px) translateY(10px); }
+        }
+
+        /* 页面容器 */
+        .page {
+            position: absolute;
+            width: 100%;
+            height: 100%;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            padding: 2rem 1.5rem;
+            opacity: 0;
+            visibility: hidden;
+            transition: opacity 0.5s ease, visibility 0.5s ease;
+        }
+
+        .page.active {
+            opacity: 1;
+            visibility: visible;
+        }
+
+        /* ===== 开屏页 ===== */
+        .landing-page {
+            text-align: center;
+        }
+
+        .title-decoration {
+            font-size: 2rem;
+            color: var(--gold-primary);
+            margin-bottom: 1rem;
+            letter-spacing: 0.5rem;
+            text-shadow: 0 0 20px rgba(212, 175, 55, 0.5);
+        }
+
+        .main-title {
+            font-family: 'Noto Serif SC', serif;
+            font-size: 3rem;
+            font-weight: 700;
+            color: var(--gold-light);
+            text-shadow: 
+                0 0 30px rgba(244, 208, 63, 0.6),
+                0 2px 4px rgba(0, 0, 0, 0.5);
+            margin-bottom: 0.5rem;
+            letter-spacing: 0.3rem;
+        }
+
+        .sub-title {
+            font-family: 'Noto Serif SC', serif;
+            font-size: 1.1rem;
+            color: var(--gold-primary);
+            letter-spacing: 0.5rem;
+            margin-bottom: 3rem;
+            opacity: 0.9;
+        }
+
+        .year-badge {
+            display: inline-flex;
+            align-items: center;
+            gap: 0.5rem;
+            padding: 0.6rem 1.5rem;
+            background: linear-gradient(135deg, rgba(212, 175, 55, 0.2) 0%, rgba(212, 175, 55, 0.1) 100%);
+            border: 1px solid rgba(212, 175, 55, 0.3);
+            border-radius: 2rem;
+            font-size: 0.9rem;
+            color: var(--gold-light);
+            margin-bottom: 3rem;
+        }
+
+        .year-badge .horse {
+            font-size: 1.2rem;
+        }
+
+        .start-btn {
+            position: relative;
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            gap: 0.5rem;
+            padding: 1rem 3rem;
+            font-family: 'Noto Serif SC', serif;
+            font-size: 1.2rem;
+            font-weight: 600;
+            color: var(--bg-dark);
+            background: linear-gradient(135deg, var(--gold-light) 0%, var(--gold-primary) 100%);
+            border: none;
+            border-radius: 3rem;
+            cursor: pointer;
+            box-shadow: 
+                0 4px 20px rgba(212, 175, 55, 0.4),
+                0 0 40px rgba(212, 175, 55, 0.2),
+                inset 0 1px 0 rgba(255, 255, 255, 0.3);
+            transition: all 0.3s ease;
+            overflow: hidden;
+        }
+
+        .start-btn::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: -100%;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.3), transparent);
+            transition: left 0.5s ease;
+        }
+
+        .start-btn:hover::before {
+            left: 100%;
+        }
+
+        .start-btn:hover {
+            transform: translateY(-2px);
+            box-shadow: 
+                0 6px 30px rgba(212, 175, 55, 0.5),
+                0 0 50px rgba(212, 175, 55, 0.3);
+        }
+
+        .start-btn:active {
+            transform: translateY(0);
+        }
+
+        .visitor-count {
+            margin-top: 3rem;
+            font-size: 0.85rem;
+            color: var(--text-muted);
+        }
+
+        .visitor-count span {
+            color: var(--gold-primary);
+        }
+
+        /* ===== 问题页 ===== */
+        .question-page {
+            padding: 1.5rem;
+        }
+
+        .progress-bar {
+            width: 100%;
+            max-width: 300px;
+            height: 3px;
+            background: rgba(255, 255, 255, 0.1);
+            border-radius: 2px;
+            margin-bottom: 1rem;
+            overflow: hidden;
+        }
+
+        .progress-fill {
+            height: 100%;
+            background: linear-gradient(90deg, var(--gold-primary), var(--gold-light));
+            border-radius: 2px;
+            transition: width 0.3s ease;
+        }
+
+        .question-number {
+            font-size: 0.9rem;
+            color: var(--text-muted);
+            margin-bottom: 2rem;
+        }
+
+        .question-card {
+            width: 100%;
+            max-width: 340px;
+            text-align: center;
+        }
+
+        .question-emoji {
+            font-size: 3rem;
+            margin-bottom: 1rem;
+        }
+
+        .question-text {
+            font-family: 'Noto Serif SC', serif;
+            font-size: 1.3rem;
+            font-weight: 600;
+            color: var(--text-light);
+            margin-bottom: 2rem;
+            line-height: 1.6;
+        }
+
+        .options {
+            display: flex;
+            flex-direction: column;
+            gap: 0.8rem;
+        }
+
+        .option-btn {
+            padding: 1rem 1.5rem;
+            background: rgba(255, 255, 255, 0.05);
+            border: 1px solid rgba(212, 175, 55, 0.2);
+            border-radius: 1rem;
+            font-family: 'Noto Sans SC', sans-serif;
+            font-size: 1rem;
+            color: var(--text-light);
+            cursor: pointer;
+            transition: all 0.3s ease;
+            text-align: left;
+            display: flex;
+            align-items: center;
+            gap: 0.8rem;
+        }
+
+        .option-btn:hover {
+            background: rgba(212, 175, 55, 0.1);
+            border-color: rgba(212, 175, 55, 0.4);
+            transform: translateX(5px);
+        }
+
+        .option-btn:active {
+            transform: translateX(5px) scale(0.98);
+        }
+
+        .option-btn .emoji {
+            font-size: 1.3rem;
+        }
+
+        /* ===== 摇签页 ===== */
+        .shake-page {
+            text-align: center;
+        }
+
+        .bamboo-container {
+            position: relative;
+            width: 120px;
+            height: 200px;
+            margin-bottom: 2rem;
+        }
+
+        .bamboo-tube {
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(180deg, #8B6914 0%, #654321 50%, #4A3000 100%);
+            border-radius: 10px 10px 15px 15px;
+            position: relative;
+            box-shadow: 
+                inset -10px 0 20px rgba(0, 0, 0, 0.3),
+                inset 10px 0 20px rgba(255, 255, 255, 0.1),
+                0 10px 30px rgba(0, 0, 0, 0.5);
+            animation: shake 0.5s ease-in-out infinite;
+            animation-play-state: paused;
+        }
+
+        .bamboo-tube.shaking {
+            animation-play-state: running;
+        }
+
+        @keyframes shake {
+            0%, 100% { transform: rotate(0deg); }
+            25% { transform: rotate(-8deg); }
+            75% { transform: rotate(8deg); }
+        }
+
+        .bamboo-tube::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 90%;
+            height: 15px;
+            background: linear-gradient(180deg, #A0522D 0%, #8B4513 100%);
+            border-radius: 50%;
+        }
+
+        .sticks {
+            position: absolute;
+            top: 10px;
+            left: 50%;
+            transform: translateX(-50%);
+            display: flex;
+            gap: 3px;
+        }
+
+        .stick {
+            width: 6px;
+            height: 60px;
+            background: linear-gradient(180deg, #DEB887 0%, #D2691E 100%);
+            border-radius: 2px;
+        }
+
+        .shake-text {
+            font-family: 'Noto Serif SC', serif;
+            font-size: 1.2rem;
+            color: var(--gold-primary);
+            margin-bottom: 1rem;
+        }
+
+        .shake-hint {
+            font-size: 0.9rem;
+            color: var(--text-muted);
+        }
+
+        /* ===== 结果页 ===== */
+        .result-page {
+            padding: 1rem;
+            overflow-y: auto;
+        }
+
+        .result-card {
+            width: 100%;
+            max-width: 360px;
+            background: linear-gradient(180deg, rgba(139, 0, 0, 0.3) 0%, rgba(26, 10, 10, 0.9) 100%);
+            border: 1px solid rgba(212, 175, 55, 0.3);
+            border-radius: 1.5rem;
+            padding: 2rem 1.5rem;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .result-card::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            height: 4px;
+            background: linear-gradient(90deg, var(--gold-primary), var(--gold-light), var(--gold-primary));
+        }
+
+        .result-header {
+            text-align: center;
+            margin-bottom: 1.5rem;
+            padding-bottom: 1.5rem;
+            border-bottom: 1px solid rgba(212, 175, 55, 0.2);
+        }
+
+        .sign-number {
+            font-size: 0.9rem;
+            color: var(--gold-primary);
+            letter-spacing: 0.3rem;
+            margin-bottom: 0.5rem;
+        }
+
+        .sign-name {
+            font-family: 'Noto Serif SC', serif;
+            font-size: 1.8rem;
+            font-weight: 700;
+            color: var(--gold-light);
+            letter-spacing: 0.3rem;
+            text-shadow: 0 0 20px rgba(244, 208, 63, 0.4);
+        }
+
+        .result-section {
+            margin-bottom: 1.5rem;
+        }
+
+        .section-title {
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+            font-size: 0.9rem;
+            color: var(--gold-primary);
+            margin-bottom: 0.8rem;
+        }
+
+        .section-content {
+            font-size: 1rem;
+            line-height: 1.8;
+            color: var(--text-light);
+        }
+
+        .blessing-text {
+            font-family: 'Noto Serif SC', serif;
+            font-size: 1.1rem;
+            font-style: italic;
+            text-align: center;
+            padding: 1rem;
+            background: rgba(212, 175, 55, 0.05);
+            border-radius: 0.8rem;
+            border-left: 3px solid var(--gold-primary);
+        }
+
+        .keywords {
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: center;
+            gap: 0.8rem;
+        }
+
+        .keyword {
+            padding: 0.5rem 1rem;
+            background: rgba(212, 175, 55, 0.1);
+            border: 1px solid rgba(212, 175, 55, 0.3);
+            border-radius: 2rem;
+            font-size: 0.9rem;
+            color: var(--gold-light);
+        }
+
+        .tips-list {
+            list-style: none;
+        }
+
+        .tips-list li {
+            padding: 0.5rem 0;
+            padding-left: 1.5rem;
+            position: relative;
+            font-size: 0.95rem;
+            color: var(--text-light);
+        }
+
+        .tips-list li::before {
+            content: '·';
+            position: absolute;
+            left: 0.5rem;
+            color: var(--gold-primary);
+            font-weight: bold;
+        }
+
+        .quote-box {
+            text-align: center;
+            padding: 1rem;
+            background: rgba(196, 30, 58, 0.1);
+            border-radius: 0.8rem;
+            border: 1px dashed rgba(196, 30, 58, 0.3);
+        }
+
+        .quote-text {
+            font-family: 'Noto Serif SC', serif;
+            font-size: 1.1rem;
+            color: var(--red-light);
+        }
+
+        .result-actions {
+            display: flex;
+            gap: 1rem;
+            margin-top: 2rem;
+        }
+
+        .action-btn {
+            flex: 1;
+            padding: 0.9rem 1rem;
+            border-radius: 2rem;
+            font-family: 'Noto Sans SC', sans-serif;
+            font-size: 0.95rem;
+            font-weight: 500;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 0.5rem;
+        }
+
+        .share-btn {
+            background: linear-gradient(135deg, var(--gold-light) 0%, var(--gold-primary) 100%);
+            color: var(--bg-dark);
+            border: none;
+        }
+
+        .share-btn:hover {
+            box-shadow: 0 4px 20px rgba(212, 175, 55, 0.4);
+            transform: translateY(-2px);
+        }
+
+        .retry-btn {
+            background: transparent;
+            color: var(--text-muted);
+            border: 1px solid rgba(255, 255, 255, 0.2);
+        }
+
+        .retry-btn:hover {
+            border-color: rgba(255, 255, 255, 0.4);
+            color: var(--text-light);
+        }
+
+        /* 响应式 */
+        @media (max-height: 700px) {
+            .main-title {
+                font-size: 2.5rem;
+            }
+            .sub-title {
+                margin-bottom: 2rem;
+            }
+            .year-badge {
+                margin-bottom: 2rem;
+            }
+            .visitor-count {
+                margin-top: 2rem;
+            }
+        }
+
+        @media (min-width: 768px) {
+            .main-title {
+                font-size: 4rem;
+            }
+            .result-card {
+                padding: 2.5rem 2rem;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="bg-pattern"></div>
+    <div class="clouds">
+        <div class="cloud">☁️</div>
+        <div class="cloud">☁️</div>
+        <div class="cloud">☁️</div>
+        <div class="cloud">☁️</div>
+    </div>
+
+    <!-- 开屏页 -->
+    <div class="page landing-page active" id="landing">
+        <div class="title-decoration">✦ ✦ ✦</div>
+        <h1 class="main-title">新年解签</h1>
+        <p class="sub-title">马年纳福 · 2026</p>
+        
+        <div class="year-badge">
+            <span class="horse">🐴</span>
+            <span>丙午马年 · 限定版</span>
+        </div>
+        
+        <button class="start-btn" onclick="startQuestions()">
+            <span>🙏</span>
+            <span>开始求签</span>
+        </button>
+        
+        <p class="visitor-count">✨ 已有 <span id="visitorCount">12,839</span> 人求签</p>
+    </div>
+
+    <!-- 问题页 -->
+    <div class="page question-page" id="question">
+        <div class="progress-bar">
+            <div class="progress-fill" id="progressFill" style="width: 33%"></div>
+        </div>
+        <p class="question-number"><span id="currentQ">1</span> / 3</p>
+        
+        <div class="question-card">
+            <div class="question-emoji" id="questionEmoji">🏠</div>
+            <h2 class="question-text" id="questionText">你现在在哪儿过年？</h2>
+            
+            <div class="options" id="optionsContainer">
+                <!-- Options will be inserted here -->
+            </div>
+        </div>
+    </div>
+
+    <!-- 摇签页 -->
+    <div class="page shake-page" id="shake">
+        <div class="bamboo-container">
+            <div class="bamboo-tube" id="bambooTube">
+                <div class="sticks">
+                    <div class="stick"></div>
+                    <div class="stick"></div>
+                    <div class="stick"></div>
+                    <div class="stick"></div>
+                    <div class="stick"></div>
+                </div>
+            </div>
+        </div>
+        <p class="shake-text" id="shakeText">点击竹筒摇签</p>
+        <p class="shake-hint">诚心求签，必有回响</p>
+    </div>
+
+    <!-- 结果页 -->
+    <div class="page result-page" id="result">
+        <div class="result-card" id="resultCard">
+            <div class="result-header">
+                <p class="sign-number" id="signNumber">第 贰拾参 签</p>
+                <h2 class="sign-name" id="signName">【 马到功成 】</h2>
+            </div>
+            
+            <div class="result-section">
+                <div class="section-title">
+                    <span>🎋</span>
+                    <span>新年赠言</span>
+                </div>
+                <div class="blessing-text" id="blessingText">
+                    "今年的你如骏马奔腾，<br>
+                    所到之处皆是坦途。"
+                </div>
+            </div>
+            
+            <div class="result-section">
+                <div class="section-title">
+                    <span>🌸</span>
+                    <span>年度三词</span>
+                </div>
+                <div class="keywords" id="keywords">
+                    <span class="keyword">一马当先</span>
+                    <span class="keyword">意外惊喜</span>
+                    <span class="keyword">贵人相助</span>
+                </div>
+            </div>
+            
+            <div class="result-section">
+                <div class="section-title">
+                    <span>📌</span>
+                    <span>马年特别提醒</span>
+                </div>
+                <ul class="tips-list" id="tipsList">
+                    <li>三月适合启动新计划</li>
+                    <li>今年的幸运色是「金色」</li>
+                    <li>遇到属马的人要多留意</li>
+                </ul>
+            </div>
+            
+            <div class="result-section">
+                <div class="section-title">
+                    <span>🔮</span>
+                    <span>今年你会惊喜地说</span>
+                </div>
+                <div class="quote-box">
+                    <p class="quote-text" id="quoteText">"没想到真的成了！"</p>
+                </div>
+            </div>
+            
+            <div class="result-actions">
+                <button class="action-btn share-btn" onclick="shareResult()">
+                    <span>📤</span>
+                    <span>分享好运</span>
+                </button>
+                <button class="action-btn retry-btn" onclick="retry()">
+                    <span>🔄</span>
+                    <span>再抽一签</span>
+                </button>
+            </div>
+        </div>
+    </div>
+
+    <script src="app.js"></script>
+</body>
+</html>
