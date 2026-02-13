@@ -1,4 +1,4 @@
-// 题库（6道，随机抽3道）
+// 题库（10道，随机抽3道）
 const allQuestions = [
     {
         id: 'location',
@@ -65,6 +65,50 @@ const allQuestions = [
             { emoji: '🌙', text: '晚睡晚起夜猫子', value: 'late' },
             { emoji: '🎰', text: '完全随机，看心情', value: 'random' },
             { emoji: '😵', text: '什么作息？不存在的', value: 'chaos' }
+        ]
+    },
+    {
+        id: 'kids',
+        emoji: '👶',
+        text: '今年过年有小朋友吗？',
+        options: [
+            { emoji: '👶', text: '有！已被小朋友包围', value: 'has_kids' },
+            { emoji: '🎁', text: '要发很多红包...', value: 'give_hongbao' },
+            { emoji: '😌', text: '没有，清净', value: 'no_kids' },
+            { emoji: '🤰', text: '今年可能会有', value: 'expecting' }
+        ]
+    },
+    {
+        id: 'relationship',
+        emoji: '💑',
+        text: '今年的感情状态是？',
+        options: [
+            { emoji: '💍', text: '已婚/有对象', value: 'married' },
+            { emoji: '🦋', text: '单身自由中', value: 'single' },
+            { emoji: '💘', text: '有点暧昧的对象', value: 'dating' },
+            { emoji: '🙈', text: '不想说...', value: 'secret' }
+        ]
+    },
+    {
+        id: 'food',
+        emoji: '🥟',
+        text: '过年最期待吃什么？',
+        options: [
+            { emoji: '🥟', text: '饺子/年夜饭', value: 'dumplings' },
+            { emoji: '🍖', text: '各种肉！', value: 'meat' },
+            { emoji: '🍰', text: '零食甜点', value: 'snacks' },
+            { emoji: '🥗', text: '吃什么都行', value: 'anything' }
+        ]
+    },
+    {
+        id: 'hongbao',
+        emoji: '🧧',
+        text: '今年红包你是？',
+        options: [
+            { emoji: '🤑', text: '收红包的', value: 'receive' },
+            { emoji: '💸', text: '发红包的', value: 'give' },
+            { emoji: '🔄', text: '左手收右手发', value: 'both' },
+            { emoji: '🙅', text: '跟红包无关', value: 'none' }
         ]
     }
 ];

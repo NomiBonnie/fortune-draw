@@ -552,6 +552,19 @@
             color: var(--text-light);
         }
 
+        .restart-link {
+            text-align: center;
+            margin-top: 1.5rem;
+            font-size: 0.9rem;
+            color: var(--text-muted);
+            cursor: pointer;
+            transition: color 0.3s ease;
+        }
+
+        .restart-link:hover {
+            color: var(--gold-primary);
+        }
+
         /* 响应式 */
         @media (max-height: 700px) {
             .main-title {
@@ -703,6 +716,8 @@
                     <span>再抽一签</span>
                 </button>
             </div>
+            
+            <p class="restart-link" onclick="retry()">🏠 重新开始</p>
         </div>
     </div>
 
