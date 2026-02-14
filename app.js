@@ -2,118 +2,108 @@
 const allQuestions = [
     {
         id: 'location',
-        emoji: '🏠',
-        text: '你现在在哪儿过年？',
+        text: '今年在哪过年',
         options: [
-            { emoji: '🏠', text: '老家，熟悉的床最香', value: 'hometown' },
-            { emoji: '🏙️', text: '大城市，一个人也挺好', value: 'city' },
-            { emoji: '✈️', text: '在路上，还没到呢', value: 'traveling' },
-            { emoji: '🌴', text: '换个地方过年', value: 'vacation' }
+            { text: '老家', value: 'hometown' },
+            { text: '大城市', value: 'city' },
+            { text: '在路上', value: 'traveling' },
+            { text: '换个地方', value: 'vacation' }
         ]
     },
     {
         id: 'status',
-        emoji: '😊',
-        text: '今年春节你的状态是？',
+        text: '春节的状态',
         options: [
-            { emoji: '😴', text: '躺平充电中', value: 'resting' },
-            { emoji: '🍻', text: '每天都在局', value: 'socializing' },
-            { emoji: '👨‍👩‍👧', text: '被亲戚包围', value: 'family' },
-            { emoji: '💻', text: '还在工作...', value: 'working' }
+            { text: '躺平充电', value: 'resting' },
+            { text: '每天有局', value: 'socializing' },
+            { text: '亲戚包围', value: 'family' },
+            { text: '还在工作', value: 'working' }
         ]
     },
     {
         id: 'wish',
-        emoji: '✨',
-        text: '新年最想要的是？',
+        text: '新年最想要',
         options: [
-            { emoji: '💰', text: '暴富', value: 'wealth' },
-            { emoji: '❤️', text: '感情顺利', value: 'love' },
-            { emoji: '🚀', text: '事业起飞', value: 'career' },
-            { emoji: '🧘', text: '身心健康', value: 'health' },
-            { emoji: '🎲', text: '随缘', value: 'random' }
+            { text: '暴富', value: 'wealth' },
+            { text: '感情顺利', value: 'love' },
+            { text: '事业起飞', value: 'career' },
+            { text: '身心健康', value: 'health' },
+            { text: '随缘', value: 'random' }
         ]
     },
     {
         id: 'keyword',
-        emoji: '🔥',
-        text: '今年你的关键词更接近？',
+        text: '今年的关键词',
         options: [
-            { emoji: '🔥', text: '搞钱', value: 'money' },
-            { emoji: '🌱', text: '成长', value: 'growth' },
-            { emoji: '🎭', text: '尝试新东西', value: 'explore' },
-            { emoji: '🛋️', text: '躺平也是正义', value: 'chill' }
+            { text: '搞钱', value: 'money' },
+            { text: '成长', value: 'growth' },
+            { text: '尝试新东西', value: 'explore' },
+            { text: '躺平', value: 'chill' }
         ]
     },
     {
         id: 'people',
-        emoji: '👨‍👩‍👧‍👦',
-        text: '今年除夕你和几个人一起过？',
+        text: '除夕和几人一起',
         options: [
-            { emoji: '🙋', text: '就我自己', value: 'alone' },
-            { emoji: '👫', text: '2-3人，小而美', value: 'small' },
-            { emoji: '👨‍👩‍👧‍👦', text: '4-6人，刚刚好', value: 'medium' },
-            { emoji: '🎊', text: '7人以上，热热闹闹', value: 'large' }
+            { text: '就我自己', value: 'alone' },
+            { text: '两三人', value: 'small' },
+            { text: '四到六人', value: 'medium' },
+            { text: '七人以上', value: 'large' }
         ]
     },
     {
         id: 'schedule',
-        emoji: '🌙',
-        text: '你最近的作息是？',
+        text: '最近的作息',
         options: [
-            { emoji: '🌅', text: '早睡早起养生派', value: 'early' },
-            { emoji: '🌙', text: '晚睡晚起夜猫子', value: 'late' },
-            { emoji: '🎰', text: '完全随机，看心情', value: 'random' },
-            { emoji: '😵', text: '什么作息？不存在的', value: 'chaos' }
+            { text: '早睡早起', value: 'early' },
+            { text: '晚睡晚起', value: 'late' },
+            { text: '完全随机', value: 'random' },
+            { text: '什么作息', value: 'chaos' }
         ]
     },
     {
         id: 'kids',
-        emoji: '👶',
-        text: '今年过年有小朋友吗？',
+        text: '过年有小朋友吗',
         options: [
-            { emoji: '👶', text: '有！已被小朋友包围', value: 'has_kids' },
-            { emoji: '🎁', text: '要发很多红包...', value: 'give_hongbao' },
-            { emoji: '😌', text: '没有，清净', value: 'no_kids' },
-            { emoji: '🤰', text: '今年可能会有', value: 'expecting' }
+            { text: '有 被包围', value: 'has_kids' },
+            { text: '要发很多红包', value: 'give_hongbao' },
+            { text: '没有 清净', value: 'no_kids' },
+            { text: '今年可能会有', value: 'expecting' }
         ]
     },
     {
         id: 'relationship',
-        emoji: '💑',
-        text: '今年的感情状态是？',
+        text: '今年的感情状态',
         options: [
-            { emoji: '💍', text: '已婚/有对象', value: 'married' },
-            { emoji: '🦋', text: '单身自由中', value: 'single' },
-            { emoji: '💘', text: '有点暧昧的对象', value: 'dating' },
-            { emoji: '🙈', text: '不想说...', value: 'secret' }
+            { text: '有对象', value: 'married' },
+            { text: '单身', value: 'single' },
+            { text: '有点暧昧', value: 'dating' },
+            { text: '不想说', value: 'secret' }
         ]
     },
     {
         id: 'food',
-        emoji: '🥟',
-        text: '过年最期待吃什么？',
+        text: '过年最期待吃',
         options: [
-            { emoji: '🥟', text: '饺子/年夜饭', value: 'dumplings' },
-            { emoji: '🍖', text: '各种肉！', value: 'meat' },
-            { emoji: '🍰', text: '零食甜点', value: 'snacks' },
-            { emoji: '🥗', text: '吃什么都行', value: 'anything' }
+            { text: '年夜饭', value: 'dumplings' },
+            { text: '各种肉', value: 'meat' },
+            { text: '零食甜点', value: 'snacks' },
+            { text: '什么都行', value: 'anything' }
         ]
     },
     {
         id: 'hongbao',
-        emoji: '🧧',
-        text: '今年红包你是？',
+        text: '今年红包你是',
         options: [
-            { emoji: '🤑', text: '收红包的', value: 'receive' },
-            { emoji: '💸', text: '发红包的', value: 'give' },
-            { emoji: '🔄', text: '左手收右手发', value: 'both' },
-            { emoji: '🙅', text: '跟红包无关', value: 'none' }
+            { text: '收的', value: 'receive' },
+            { text: '发的', value: 'give' },
+            { text: '左手收右手发', value: 'both' },
+            { text: '跟红包无关', value: 'none' }
         ]
     }
 ];
 
-// 签文库（马年主题）
+// 签文库
 const fortunes = {
     signNames: [
         '马到功成', '龙马精神', '一马当先', '万马奔腾', '马上有喜',
@@ -121,29 +111,29 @@ const fortunes = {
     ],
     blessings: {
         wealth: [
-            '"今年的你如骏马奔腾，<br>财运挡都挡不住。"',
-            '"马年财门大开，<br>意想不到的进账正在路上。"',
-            '"你的财运如万马奔腾，<br>势不可挡。"'
+            '今年的你如骏马奔腾<br>财运挡都挡不住',
+            '马年财门大开<br>意想不到的进账正在路上',
+            '你的财运如万马奔腾<br>势不可挡'
         ],
         love: [
-            '"今年会有人骑着白马来找你，<br>也可能你就是那匹白马。"',
-            '"桃花运如春风拂面，<br>不经意间就会心动。"',
-            '"马年的缘分来得猝不及防，<br>准备好了吗？"'
+            '今年会有人骑着白马来找你<br>也可能你就是那匹白马',
+            '桃花运如春风拂面<br>不经意间就会心动',
+            '马年的缘分来得猝不及防<br>准备好了吗'
         ],
         career: [
-            '"今年你会一马当先，<br>甩开所有人的视野。"',
-            '"事业如骏马奔腾，<br>所到之处皆是坦途。"',
-            '"马年你的才华将被看见，<br>准备接受掌声吧。"'
+            '今年你会一马当先<br>甩开所有人的视野',
+            '事业如骏马奔腾<br>所到之处皆是坦途',
+            '马年你的才华将被看见<br>准备接受掌声吧'
         ],
         health: [
-            '"龙马精神护佑你，<br>今年身心都会轻盈。"',
-            '"马年你会找到<br>最适合自己的节奏。"',
-            '"今年的你，<br>内心会比以往更平静。"'
+            '龙马精神护佑你<br>今年身心都会轻盈',
+            '马年你会找到<br>最适合自己的节奏',
+            '今年的你<br>内心会比以往更平静'
         ],
         random: [
-            '"马年的惊喜藏在日常里，<br>保持好奇心。"',
-            '"顺其自然的你，<br>今年会收获意外之喜。"',
-            '"不强求，反而得到更多。<br>这就是你的马年。"'
+            '马年的惊喜藏在日常里<br>保持好奇心',
+            '顺其自然的你<br>今年会收获意外之喜',
+            '不强求 反而得到更多<br>这就是你的马年'
         ]
     },
     keywords: {
@@ -166,71 +156,34 @@ const fortunes = {
             '穿金色的东西会带来好运'
         ],
         wealth: [
-            '初五那天适合发一条朋友圈',
             '三月有一笔意外进账',
-            '今年的财运藏在「橙色」里'
+            '今年的财运藏在橙色里',
+            '周三适合谈钱的事'
         ],
         love: [
             '二月别删任何聊天记录',
-            '回复消息别总是"哈哈哈"',
-            '今年的桃花藏在朋友介绍里'
+            '今年的桃花藏在朋友介绍里',
+            '主动一点会有惊喜'
         ],
         career: [
             '周三适合谈重要的事',
-            '有人夸你时，要相信是真的',
+            '有人夸你时 要相信是真的',
             '今年的贵人可能比你年轻'
         ],
         health: [
             '早起十分钟会带来惊喜',
             '今年试试以前没做过的运动',
-            '深呼吸三次，好运就来'
+            '深呼吸三次 好运就来'
         ],
         hometown: [
-            '亲戚问工资时笑而不答最吉利',
+            '饭桌上的某句话藏着今年的密码',
             '有人给你夹菜时要说谢谢',
-            '饭桌上的某句话藏着今年的密码'
+            '跟家人聊聊以前的事'
         ],
         city: [
-            '今年会在意想不到的地方遇到惊喜',
             '一个人的时候灵感最多',
-            '给自己做顿好吃的会转运'
-        ],
-        resting: [
-            '凌晨的灵感第二天还是会觉得好',
-            '睡饱了再做决定',
-            '躺着也能遇到好运'
-        ],
-        socializing: [
-            '有人敬酒时说的话要记住',
-            '今年的机会藏在饭局里',
-            '多听少说，收获更多'
-        ]
-    },
-    quotes: {
-        wealth: [
-            '"这钱怎么来的？"',
-            '"等等，这是真的吗？"',
-            '"原来赚钱可以这么轻松？"'
-        ],
-        love: [
-            '"等等，这是在撩我？"',
-            '"没想到会是 TA..."',
-            '"原来被喜欢是这种感觉"'
-        ],
-        career: [
-            '"没想到真的成了！"',
-            '"终于被看见了"',
-            '"原来我可以的"'
-        ],
-        health: [
-            '"最近状态真的好好"',
-            '"原来放松下来这么舒服"',
-            '"今年是最轻松的一年"'
-        ],
-        random: [
-            '"这也行？"',
-            '"运气也太好了吧"',
-            '"完全没想到！"'
+            '给自己做顿好吃的会转运',
+            '今年会在意想不到的地方遇到惊喜'
         ]
     }
 };
@@ -254,6 +207,19 @@ function showPage(pageId) {
     document.getElementById(pageId).classList.add('active');
 }
 
+// 更新进度点
+function updateProgressDots(index) {
+    for (let i = 1; i <= 3; i++) {
+        const dot = document.getElementById(`dot${i}`);
+        dot.classList.remove('active', 'completed');
+        if (i < index + 1) {
+            dot.classList.add('completed');
+        } else if (i === index + 1) {
+            dot.classList.add('active');
+        }
+    }
+}
+
 // 开始答题
 function startQuestions() {
     selectRandomQuestions();
@@ -266,9 +232,7 @@ function startQuestions() {
 // 显示问题
 function showQuestion(index) {
     const question = selectedQuestions[index];
-    document.getElementById('currentQ').textContent = index + 1;
-    document.getElementById('progressFill').style.width = `${((index + 1) / 3) * 100}%`;
-    document.getElementById('questionEmoji').textContent = question.emoji;
+    updateProgressDots(index);
     document.getElementById('questionText').textContent = question.text;
     
     const container = document.getElementById('optionsContainer');
@@ -277,7 +241,7 @@ function showQuestion(index) {
     question.options.forEach(option => {
         const btn = document.createElement('button');
         btn.className = 'option-btn';
-        btn.innerHTML = `<span class="emoji">${option.emoji}</span><span>${option.text}</span>`;
+        btn.textContent = option.text;
         btn.onclick = () => selectOption(question.id, option.value);
         container.appendChild(btn);
     });
@@ -289,59 +253,31 @@ function selectOption(questionId, value) {
     
     if (currentQuestionIndex < 2) {
         currentQuestionIndex++;
-        setTimeout(() => showQuestion(currentQuestionIndex), 200);
+        setTimeout(() => showQuestion(currentQuestionIndex), 150);
     } else {
         showPage('shake');
-        setTimeout(startShaking, 500);
     }
 }
 
 // 摇签动画
 function startShaking() {
-    const tube = document.getElementById('bambooTube');
-    const text = document.getElementById('shakeText');
+    const char = document.getElementById('shakeChar');
+    if (char.classList.contains('shaking')) return;
     
-    tube.classList.add('shaking');
-    text.textContent = '正在解签...';
-    
-    // 摇签音效（可选）
-    // playShakeSound();
+    char.classList.add('shaking');
     
     setTimeout(() => {
-        tube.classList.remove('shaking');
+        char.classList.remove('shaking');
         generateResult();
         showPage('result');
-    }, 2500);
+    }, 2000);
 }
-
-// 点击摇签
-document.addEventListener('DOMContentLoaded', () => {
-    const tube = document.getElementById('bambooTube');
-    if (tube) {
-        tube.onclick = startShaking;
-    }
-    
-    // 更新访客计数
-    const count = Math.floor(Math.random() * 5000) + 10000;
-    document.getElementById('visitorCount').textContent = count.toLocaleString();
-});
 
 // 生成签文
 function generateResult() {
     // 签名
     const signName = fortunes.signNames[Math.floor(Math.random() * fortunes.signNames.length)];
-    document.getElementById('signName').textContent = `【 ${signName} 】`;
-    
-    // 签号
-    const signNum = Math.floor(Math.random() * 99) + 1;
-    const numMap = ['零','壹','贰','参','肆','伍','陆','柒','捌','玖'];
-    const tens = Math.floor(signNum / 10);
-    const ones = signNum % 10;
-    let signNumText = '第 ';
-    if (tens > 0) signNumText += numMap[tens] + '拾';
-    if (ones > 0) signNumText += numMap[ones];
-    signNumText += ' 签';
-    document.getElementById('signNumber').textContent = signNumText;
+    document.getElementById('signName').textContent = signName;
     
     // 获取主要愿望类型
     const wishType = answers.wish || 'random';
@@ -351,33 +287,29 @@ function generateResult() {
     const blessing = blessings[Math.floor(Math.random() * blessings.length)];
     document.getElementById('blessingText').innerHTML = blessing;
     
-    // 关键词（从愿望和其他答案中各取）
+    // 关键词
     const keywordsContainer = document.getElementById('keywords');
     keywordsContainer.innerHTML = '';
     
     let selectedKeywords = [];
     
-    // 从愿望类型取一个
     if (fortunes.keywords[wishType]) {
         const wishKeywords = fortunes.keywords[wishType];
         selectedKeywords.push(wishKeywords[Math.floor(Math.random() * wishKeywords.length)]);
     }
     
-    // 从位置取一个
     const locationType = answers.location;
     if (locationType && fortunes.keywords[locationType]) {
         const locKeywords = fortunes.keywords[locationType];
         selectedKeywords.push(locKeywords[Math.floor(Math.random() * locKeywords.length)]);
     }
     
-    // 从状态取一个
     const statusType = answers.status;
     if (statusType && fortunes.keywords[statusType]) {
         const statusKeywords = fortunes.keywords[statusType];
         selectedKeywords.push(statusKeywords[Math.floor(Math.random() * statusKeywords.length)]);
     }
     
-    // 确保有3个关键词
     while (selectedKeywords.length < 3) {
         const randomType = Object.keys(fortunes.keywords)[Math.floor(Math.random() * Object.keys(fortunes.keywords).length)];
         const randomKeywords = fortunes.keywords[randomType];
@@ -401,20 +333,13 @@ function generateResult() {
     let tips = [...fortunes.tips.general];
     if (fortunes.tips[wishType]) tips = tips.concat(fortunes.tips[wishType]);
     if (fortunes.tips[answers.location]) tips = tips.concat(fortunes.tips[answers.location]);
-    if (fortunes.tips[answers.status]) tips = tips.concat(fortunes.tips[answers.status]);
     
-    // 随机选3条
     const shuffledTips = tips.sort(() => Math.random() - 0.5).slice(0, 3);
     shuffledTips.forEach(tip => {
         const li = document.createElement('li');
         li.textContent = tip;
         tipsList.appendChild(li);
     });
-    
-    // 金句
-    const quotes = fortunes.quotes[wishType];
-    const quote = quotes[Math.floor(Math.random() * quotes.length)];
-    document.getElementById('quoteText').textContent = quote;
 }
 
 // 分享
@@ -422,17 +347,21 @@ function shareResult() {
     if (navigator.share) {
         navigator.share({
             title: '我的马年签',
-            text: '我抽到了一支马年好签！来测测你的运势吧~',
+            text: '我抽到了一支马年好签',
             url: window.location.href
         });
     } else {
-        // 降级：复制链接
         navigator.clipboard.writeText(window.location.href);
-        alert('链接已复制，快去分享给朋友吧！');
+        alert('链接已复制');
     }
 }
 
-// 重新抽签
+// 再抽一签
 function retry() {
+    startQuestions();
+}
+
+// 重新开始
+function restart() {
     showPage('landing');
 }
