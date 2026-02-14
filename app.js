@@ -204,16 +204,196 @@ const keywordPool = {
     hongbao: ['红包连连', '财来财往', '财运亨通']
 };
 
-// 提示语池（更丰富）
+// ===== 提示语池（100+条）=====
+
+// 幸运数字
+const luckyNumbers = [
+    '今年的幸运数字是 3',
+    '今年的幸运数字是 6',
+    '今年的幸运数字是 8',
+    '今年的幸运数字是 9',
+    '今年的幸运数字是 2 和 7',
+    '今年的幸运数字是 3 和 8',
+    '今年的幸运数字是 1 和 6',
+    '今年的幸运数字是 5 和 9',
+    '看到数字 168 要留意',
+    '看到数字 888 是好兆头',
+    '手机尾号带 6 的人是贵人',
+    '楼层带 3 的地方有好运'
+];
+
+// 幸运颜色
+const luckyColors = [
+    '今年的幸运色是金色',
+    '今年的幸运色是红色',
+    '今年的幸运色是绿色',
+    '今年的幸运色是蓝色',
+    '今年的幸运色是白色',
+    '今年的幸运色是橙色',
+    '今年穿黄色会带来好运',
+    '今年多用米白色的东西',
+    '紫色今年对你特别好',
+    '今年的财运藏在金色里',
+    '今年的桃花藏在粉色里',
+    '今年穿大地色系会有安全感',
+    '亮色系会给你带来惊喜'
+];
+
+// 跟人相关（属相）
+const zodiacTips = [
+    '遇到属马的人要多留意',
+    '属龙的人今年是你的贵人',
+    '属兔的人会给你带来好消息',
+    '属蛇的朋友今年会帮到你',
+    '跟属狗的人合作会顺利',
+    '属猴的人今年跟你特别投缘',
+    '属牛的人可能会带来机会',
+    '今年跟属羊的人多聊聊',
+    '属虎的人今年会理解你',
+    '属猪的朋友值得信任',
+    '属鼠的人有意想不到的资源',
+    '属鸡的人今年跟你有缘'
+];
+
+// 跟人相关（年龄/关系）
+const peopleTips = [
+    '今年的贵人可能比你年轻',
+    '年长的朋友会给你好建议',
+    '同龄人里有你的知己',
+    '陌生人的话今年要多听听',
+    '老朋友会带来惊喜',
+    '新认识的人可能改变你的人生',
+    '今年多跟小朋友相处',
+    '长辈的一句话藏着密码',
+    '多跟异性朋友交流会有收获',
+    '同性朋友今年是你的后盾',
+    '远方的朋友会带来消息',
+    '邻居可能帮到你',
+    '同事里有人在默默支持你'
+];
+
+// 时间相关
+const timeTips = [
+    '三月适合启动新计划',
+    '四月是转运的月份',
+    '五月会有心动的瞬间',
+    '六月适合做重要决定',
+    '七月是收获的开始',
+    '八月是财运高峰',
+    '九月适合出门旅行',
+    '十月会有意外之喜',
+    '周三适合谈重要的事',
+    '周五的直觉特别准',
+    '周末做的决定更靠谱',
+    '每月初一许愿最灵',
+    '每月十五适合反思',
+    '早上做的决定比晚上好'
+];
+
+// 行为/习惯相关
+const actionTips = [
+    '今年少说多做',
+    '主动一点会有惊喜',
+    '深呼吸三次好运就来',
+    '不顺的时候喝杯热水',
+    '早起十分钟会有惊喜',
+    '睡前想三件好事',
+    '每天对镜子笑一笑',
+    '把想法写下来会更清晰',
+    '今年试试以前没做过的事',
+    '出门前整理一下会转运',
+    '给自己做顿好吃的会转运',
+    '换个发型会带来好运',
+    '收拾房间能赶走霉运',
+    '今年的朋友圈可以多发',
+    '偶尔断网一天会有惊喜'
+];
+
+// 物品相关
+const objectTips = [
+    '穿金色的东西会带来好运',
+    '今年随身带点红色的小物件',
+    '玉石类的配饰对你好',
+    '今年可以换个新钱包',
+    '旧照片里藏着今年的答案',
+    '书架上的书今年要翻一翻',
+    '绿植会给你带来好运气',
+    '今年适合换个新头像',
+    '手表今年会给你带来好运',
+    '把不用的东西清理掉会转运'
+];
+
+// 食物相关
+const foodTips = [
+    '今年多吃点甜的会开心',
+    '红色的水果对你好',
+    '今年试试以前没吃过的菜',
+    '和朋友吃饭比一个人吃运气好',
+    '早餐好好吃会一整天顺利',
+    '今年的好运藏在汤里',
+    '吃火锅的时候适合聊正事'
+];
+
+// 地点相关
+const placeTips = [
+    '今年会在意想不到的地方遇到惊喜',
+    '咖啡店是你的幸运地点',
+    '有水的地方对你好',
+    '高处能让你想得更清楚',
+    '图书馆或书店有好运气',
+    '今年多去公园走走',
+    '老地方可能有新机会'
+];
+
+// 社交媒体/现代相关
+const modernTips = [
+    '朋友圈第一个点赞的人是贵人',
+    '今年的机会可能来自私信',
+    '有人突然找你聊天要重视',
+    '被推荐的内容今年要多看看',
+    '旧照片发出来会有好事',
+    '今年的表情包要用开心的',
+    '点赞过的人今年会帮到你'
+];
+
+// 心态相关
+const mindsetTips = [
+    '有人夸你时要相信是真的',
+    '今年的直觉特别准',
+    '别想太多 做了再说',
+    '焦虑的时候出去走走',
+    '今年少内耗 多行动',
+    '相信自己 你比想象中厉害',
+    '今年适合说「好」',
+    '拒绝不喜欢的事会带来好运',
+    '顺其自然反而更好',
+    '今年放过自己 会更轻松'
+];
+
+// 整合所有 tips
 const tipsPool = {
+    numbers: luckyNumbers,
+    colors: luckyColors,
+    zodiac: zodiacTips,
+    people: peopleTips,
+    time: timeTips,
+    action: actionTips,
+    object: objectTips,
+    food: foodTips,
+    place: placeTips,
+    modern: modernTips,
+    mindset: mindsetTips,
+    // 按类型分类
     wealth: [
         '三月有一笔意外进账',
         '周三适合谈钱的事',
-        '今年的财运藏在橙色里',
         '投资前先睡一觉再决定',
         '朋友介绍的机会要认真考虑',
         '八月是财运高峰',
-        '别轻易借钱给生肖属鸡的人'
+        '别轻易借钱出去',
+        '今年的财运藏在人脉里',
+        '存钱比花钱运气好',
+        '二手的东西今年能卖好价'
     ],
     love: [
         '二月别删任何聊天记录',
@@ -222,41 +402,59 @@ const tipsPool = {
         '前任如果找你 不要回',
         '五月会有心动的瞬间',
         '穿粉色会增加魅力',
-        '异地恋今年会有结果'
+        '异地恋今年会有结果',
+        '暧昧的关系今年会明朗',
+        '今年适合表白'
     ],
     career: [
         '周一汇报工作运气最好',
-        '有人夸你时要相信是真的',
         '今年的贵人可能比你年轻',
-        '六月适合跳槽',
+        '六月适合跳槽或谈加薪',
         '主动争取会得到意外支持',
-        '换个发型会带来好运',
-        '同事的建议要认真听'
+        '同事的建议要认真听',
+        '今年适合学新技能',
+        '简历可以更新一下了',
+        '今年的机会藏在细节里'
     ],
     health: [
         '早起十分钟会有惊喜',
         '今年试试以前没做过的运动',
-        '深呼吸三次好运就来',
         '四月开始调整作息',
         '少看手机眼睛会感谢你',
-        '今年适合学冥想',
-        '走路比跑步更适合你今年'
-    ],
-    general: [
-        '遇到属马的人要多留意',
-        '今年的幸运数字是3和8',
-        '穿金色的东西会带来好运',
-        '每月初一许愿最灵',
-        '不顺的时候喝杯热水',
-        '今年少说多做',
-        '周末的直觉特别准',
-        '朋友圈第一个点赞的人是贵人'
+        '今年适合学冥想或瑜伽',
+        '走路比跑步更适合你今年',
+        '今年要多喝水',
+        '睡眠是今年最重要的事'
     ],
     location: {
-        hometown: ['饭桌上的某句话藏着今年的密码', '有人给你夹菜时要说谢谢', '跟家人聊聊以前的事'],
-        city: ['一个人的时候灵感最多', '给自己做顿好吃的会转运', '今年会在意想不到的地方遇到惊喜'],
-        traveling: ['旅途中遇到的人可能改变你的人生', '别赶时间 慢慢走', '拍照要发出来'],
-        vacation: ['换个地方会换个运气', '度假时的想法很重要 记下来', '遇到当地人要礼貌']
+        hometown: [
+            '饭桌上的某句话藏着今年的密码',
+            '有人给你夹菜时要说谢谢',
+            '跟家人聊聊以前的事',
+            '老家的人今年会帮到你',
+            '回去一趟会想通很多事'
+        ],
+        city: [
+            '一个人的时候灵感最多',
+            '给自己做顿好吃的会转运',
+            '今年会在意想不到的地方遇到惊喜',
+            '城市里的陌生人可能是贵人',
+            '换个常去的咖啡店会有新发现'
+        ],
+        traveling: [
+            '旅途中遇到的人可能改变你的人生',
+            '别赶时间 慢慢走',
+            '拍照要发出来 会有好事',
+            '迷路的时候最容易遇到惊喜',
+            '跟当地人聊天会有收获'
+        ],
+        vacation: [
+            '换个地方会换个运气',
+            '度假时的想法很重要 记下来',
+            '遇到当地人要礼貌',
+            '旅行中买的东西会带来好运',
+            '换个环境能想通一些事'
+        ]
     }
 };
 
@@ -457,35 +655,49 @@ function generateResult() {
         keywordsContainer.appendChild(span);
     });
     
-    // ===== 4. 提示语（根据答案选择相关的）=====
+    // ===== 4. 提示语（从100+条里选，确保多样性）=====
     const tipsList = document.getElementById('tipsList');
     tipsList.innerHTML = '';
     
-    let tipCandidates = [...tipsPool.general];
+    let selectedTips = new Set();
     
-    // 根据愿望添加
+    // 1. 必选一条幸运数字或颜色
+    if (Math.random() > 0.5) {
+        selectedTips.add(pickRandom(tipsPool.numbers));
+    } else {
+        selectedTips.add(pickRandom(tipsPool.colors));
+    }
+    
+    // 2. 必选一条跟人相关的（属相或人脉）
+    if (Math.random() > 0.5) {
+        selectedTips.add(pickRandom(tipsPool.zodiac));
+    } else {
+        selectedTips.add(pickRandom(tipsPool.people));
+    }
+    
+    // 3. 根据愿望添加相关提示
     if (wish && tipsPool[wish]) {
-        tipCandidates = tipCandidates.concat(tipsPool[wish]);
+        selectedTips.add(pickRandom(tipsPool[wish]));
     }
     
-    // 根据地点添加
+    // 4. 根据地点添加
     if (location && tipsPool.location && tipsPool.location[location]) {
-        tipCandidates = tipCandidates.concat(tipsPool.location[location]);
+        selectedTips.add(pickRandom(tipsPool.location[location]));
     }
     
-    // 根据关键词添加
-    if (keyword === 'money' && tipsPool.wealth) {
-        tipCandidates = tipCandidates.concat(tipsPool.wealth);
-    }
-    if (keyword === 'growth' && tipsPool.career) {
-        tipCandidates = tipCandidates.concat(tipsPool.career);
+    // 5. 随机补足（从时间、行为、物品、食物、地点、现代、心态里选）
+    const randomPools = ['time', 'action', 'object', 'food', 'place', 'modern', 'mindset'];
+    while (selectedTips.size < 3) {
+        const poolKey = pickRandom(randomPools);
+        if (tipsPool[poolKey] && tipsPool[poolKey].length > 0) {
+            selectedTips.add(pickRandom(tipsPool[poolKey]));
+        }
     }
     
-    // 洗牌并选3条（确保不重复）
-    const shuffledTips = tipCandidates.sort(() => Math.random() - 0.5);
-    const uniqueTips = [...new Set(shuffledTips)].slice(0, 3);
+    // 转为数组，打乱，取前3条
+    const finalTips = Array.from(selectedTips).sort(() => Math.random() - 0.5).slice(0, 3);
     
-    uniqueTips.forEach(tip => {
+    finalTips.forEach(tip => {
         const li = document.createElement('li');
         li.textContent = tip;
         tipsList.appendChild(li);
