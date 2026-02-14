@@ -14,13 +14,13 @@
             --red-bg: #B91C1C;
             --gold-rich: #D4A84B;
             --gold-light: #F0D998;
-            --gold-line: rgba(212, 168, 75, 0.6);
-            --gold-line-light: rgba(212, 168, 75, 0.25);
+            --gold-dark: #B8860B;
+            --gold-line: rgba(212, 168, 75, 0.8);
+            --gold-line-light: rgba(212, 168, 75, 0.35);
             --cream-bg: #FDF8F0;
             --cream-dark: #F5EDE0;
             --ink-black: #1a1410;
             --text-on-red: #FDF8F0;
-            --text-gold: #D4A84B;
         }
 
         * {
@@ -48,44 +48,62 @@
             overflow: hidden;
         }
 
-        /* 背景装饰 - 祥云纹 */
+        /* 背景装饰 - 回纹图案 */
         .bg-pattern {
             position: fixed;
             top: 0;
             left: 0;
             right: 0;
             bottom: 0;
-            opacity: 0.06;
-            background-image: url("data:image/svg+xml,%3Csvg width='120' height='120' viewBox='0 0 120 120' xmlns='http://www.w3.org/2000/svg'%3E%3Cpath d='M30 60 Q30 40 50 40 Q70 40 70 60 Q70 50 80 50 Q95 50 95 65 Q95 80 80 80 L25 80 Q10 80 10 65 Q10 50 25 50 Q30 50 30 60Z' fill='none' stroke='%23D4A84B' stroke-width='1'/%3E%3C/svg%3E");
-            background-size: 120px 120px;
+            opacity: 0.08;
+            background-image: url("data:image/svg+xml,%3Csvg width='60' height='60' viewBox='0 0 60 60' xmlns='http://www.w3.org/2000/svg'%3E%3Cpath d='M0 30 L10 30 L10 10 L30 10 L30 0 M30 0 L30 10 L50 10 L50 30 L60 30 M60 30 L50 30 L50 50 L30 50 L30 60 M30 60 L30 50 L10 50 L10 30 L0 30' fill='none' stroke='%23D4A84B' stroke-width='1.5'/%3E%3C/svg%3E");
+            background-size: 60px 60px;
             pointer-events: none;
             z-index: 0;
         }
 
-        /* 金色流线装饰 */
-        .flow-lines {
+        /* 页面边框 - 粗金线 */
+        .page-border {
             position: fixed;
-            top: 0;
-            left: 0;
-            right: 0;
-            bottom: 0;
+            top: 12px;
+            left: 12px;
+            right: 12px;
+            bottom: 12px;
+            border: 3px solid var(--gold-rich);
             pointer-events: none;
-            z-index: 0;
-            overflow: hidden;
+            z-index: 2;
         }
 
-        .flow-line {
-            position: absolute;
-            width: 200%;
-            height: 1px;
-            background: linear-gradient(90deg, transparent, var(--gold-line-light), transparent);
-            transform-origin: center;
+        /* 内边框 */
+        .page-border-inner {
+            position: fixed;
+            top: 20px;
+            left: 20px;
+            right: 20px;
+            bottom: 20px;
+            border: 1px solid var(--gold-line);
+            pointer-events: none;
+            z-index: 2;
         }
 
-        .flow-line:nth-child(1) { top: 15%; left: -50%; transform: rotate(-5deg); }
-        .flow-line:nth-child(2) { top: 35%; left: -50%; transform: rotate(3deg); }
-        .flow-line:nth-child(3) { bottom: 30%; left: -50%; transform: rotate(-3deg); }
-        .flow-line:nth-child(4) { bottom: 15%; left: -50%; transform: rotate(5deg); }
+        /* 四角装饰 - 更复杂 */
+        .corner-deco {
+            position: fixed;
+            width: 50px;
+            height: 50px;
+            z-index: 3;
+            pointer-events: none;
+        }
+
+        .corner-deco svg {
+            width: 100%;
+            height: 100%;
+        }
+
+        .corner-deco.tl { top: 8px; left: 8px; }
+        .corner-deco.tr { top: 8px; right: 8px; transform: scaleX(-1); }
+        .corner-deco.bl { bottom: 8px; left: 8px; transform: scaleY(-1); }
+        .corner-deco.br { bottom: 8px; right: 8px; transform: scale(-1); }
 
         /* 页面容器 */
         .page {
@@ -96,7 +114,7 @@
             flex-direction: column;
             align-items: center;
             justify-content: center;
-            padding: 2rem 1.5rem;
+            padding: 3rem 2rem;
             opacity: 0;
             visibility: hidden;
             transition: opacity 0.5s ease, visibility 0.5s ease;
@@ -115,50 +133,49 @@
 
         .landing-card {
             position: relative;
-            padding: 3rem 2.5rem;
-            background: linear-gradient(180deg, rgba(180, 25, 25, 0.4) 0%, rgba(140, 20, 20, 0.6) 100%);
+            padding: 2.5rem 2rem;
+            max-width: 300px;
+        }
+
+        /* 卡片边框装饰 */
+        .card-frame {
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            border: 2px solid var(--gold-rich);
+            pointer-events: none;
+        }
+
+        .card-frame::before {
+            content: '';
+            position: absolute;
+            top: 6px;
+            left: 6px;
+            right: 6px;
+            bottom: 6px;
             border: 1px solid var(--gold-line);
         }
 
-        /* 卡片四角装饰 */
-        .card-corner {
-            position: absolute;
-            width: 20px;
-            height: 20px;
+        /* 顶部祥云装饰 */
+        .top-ornament {
+            margin-bottom: 1rem;
         }
 
-        .card-corner svg {
-            width: 100%;
-            height: 100%;
-        }
-
-        .card-corner.tl { top: -1px; left: -1px; }
-        .card-corner.tr { top: -1px; right: -1px; transform: rotate(90deg); }
-        .card-corner.bl { bottom: -1px; left: -1px; transform: rotate(-90deg); }
-        .card-corner.br { bottom: -1px; right: -1px; transform: rotate(180deg); }
-
-        .corner-svg {
-            fill: none;
-            stroke: var(--gold-rich);
-            stroke-width: 1.5;
-        }
-
-        /* 顶部装饰 */
-        .top-deco {
-            margin-bottom: 1.5rem;
-        }
-
-        .top-deco svg {
-            width: 80px;
-            height: 24px;
+        .top-ornament svg {
+            width: 120px;
+            height: 40px;
         }
 
         .main-title {
             font-family: 'Ma Shan Zheng', cursive;
-            font-size: clamp(3rem, 14vw, 5rem);
+            font-size: clamp(2.8rem, 12vw, 4rem);
             font-weight: 400;
             color: var(--gold-light);
-            text-shadow: 0 2px 20px rgba(212, 168, 75, 0.3);
+            text-shadow: 
+                0 2px 4px rgba(0, 0, 0, 0.3),
+                0 0 30px rgba(212, 168, 75, 0.3);
             margin-bottom: 0.3rem;
             letter-spacing: 0.15em;
             line-height: 1.2;
@@ -166,57 +183,69 @@
 
         .sub-title {
             font-family: 'Noto Serif SC', serif;
-            font-size: 0.9rem;
+            font-size: 0.85rem;
             font-weight: 400;
             color: var(--gold-rich);
-            letter-spacing: 0.5em;
-            margin-bottom: 2rem;
-            opacity: 0.9;
+            letter-spacing: 0.6em;
+            margin-bottom: 1.5rem;
         }
 
-        /* 装饰分隔线 */
-        .deco-divider {
+        /* 复杂分隔线 */
+        .ornate-divider {
             display: flex;
             align-items: center;
             justify-content: center;
-            gap: 0.8rem;
-            margin-bottom: 2rem;
+            gap: 0.3rem;
+            margin-bottom: 1.5rem;
         }
 
-        .deco-line {
-            width: 40px;
+        .ornate-divider .line-thick {
+            width: 30px;
+            height: 2px;
+            background: var(--gold-rich);
+        }
+
+        .ornate-divider .line-thin {
+            width: 15px;
             height: 1px;
             background: var(--gold-line);
         }
 
-        .deco-diamond {
+        .ornate-divider .dot {
             width: 6px;
             height: 6px;
             background: var(--gold-rich);
             transform: rotate(45deg);
         }
 
+        .ornate-divider .circle {
+            width: 8px;
+            height: 8px;
+            border: 2px solid var(--gold-rich);
+            border-radius: 50%;
+        }
+
         .start-btn {
-            padding: 1rem 2.5rem;
-            font-family: 'Noto Serif SC', serif;
-            font-size: 1rem;
-            font-weight: 400;
-            letter-spacing: 0.4em;
+            padding: 0.9rem 2rem;
+            font-family: 'Ma Shan Zheng', cursive;
+            font-size: 1.3rem;
+            letter-spacing: 0.3em;
             color: var(--red-deep);
-            background: linear-gradient(135deg, var(--gold-light) 0%, var(--gold-rich) 100%);
-            border: none;
+            background: linear-gradient(180deg, var(--gold-light) 0%, var(--gold-rich) 100%);
+            border: 2px solid var(--gold-dark);
             cursor: pointer;
             transition: all 0.3s ease;
+            box-shadow: 0 4px 15px rgba(0, 0, 0, 0.2);
         }
 
         .start-btn:hover {
             transform: translateY(-2px);
-            box-shadow: 0 8px 30px rgba(212, 168, 75, 0.3);
+            box-shadow: 0 6px 25px rgba(212, 168, 75, 0.4);
         }
 
         /* ===== 问题页 ===== */
         .question-page {
-            padding: 2rem 1.5rem;
+            padding: 3rem 2rem;
         }
 
         .progress-container {
@@ -226,12 +255,12 @@
         .progress-line {
             display: flex;
             align-items: center;
-            gap: 0.4rem;
+            gap: 0.3rem;
         }
 
         .progress-segment {
-            width: 40px;
-            height: 1px;
+            width: 35px;
+            height: 2px;
             background: var(--gold-line-light);
             transition: background 0.3s ease;
         }
@@ -241,9 +270,9 @@
         }
 
         .progress-node {
-            width: 10px;
-            height: 10px;
-            border: 1px solid var(--gold-line-light);
+            width: 12px;
+            height: 12px;
+            border: 2px solid var(--gold-line-light);
             background: transparent;
             transform: rotate(45deg);
             transition: all 0.3s ease;
@@ -252,7 +281,7 @@
         .progress-node.active {
             border-color: var(--gold-rich);
             background: var(--gold-rich);
-            box-shadow: 0 0 12px rgba(212, 168, 75, 0.5);
+            box-shadow: 0 0 15px rgba(212, 168, 75, 0.6);
         }
 
         .progress-node.completed {
@@ -262,34 +291,34 @@
 
         .question-card {
             width: 100%;
-            max-width: 320px;
+            max-width: 300px;
             text-align: center;
         }
 
         .question-text {
             font-family: 'Ma Shan Zheng', cursive;
-            font-size: clamp(1.8rem, 7vw, 2.2rem);
+            font-size: clamp(1.6rem, 6vw, 2rem);
             font-weight: 400;
             color: var(--gold-light);
-            margin-bottom: 2rem;
+            margin-bottom: 1.5rem;
             line-height: 1.5;
-            letter-spacing: 0.08em;
+            letter-spacing: 0.1em;
         }
 
         .options {
             display: flex;
             flex-direction: column;
-            gap: 0.6rem;
+            gap: 0.5rem;
         }
 
         .option-btn {
-            padding: 0.9rem 1.2rem;
-            background: rgba(0, 0, 0, 0.15);
-            border: 1px solid var(--gold-line-light);
+            padding: 0.85rem 1rem;
+            background: rgba(0, 0, 0, 0.2);
+            border: 2px solid var(--gold-line-light);
             font-family: 'Noto Sans SC', sans-serif;
-            font-size: 0.95rem;
-            font-weight: 300;
-            letter-spacing: 0.08em;
+            font-size: 0.9rem;
+            font-weight: 400;
+            letter-spacing: 0.1em;
             color: var(--text-on-red);
             cursor: pointer;
             transition: all 0.3s ease;
@@ -297,8 +326,8 @@
         }
 
         .option-btn:hover {
-            background: rgba(212, 168, 75, 0.15);
-            border-color: var(--gold-line);
+            background: rgba(212, 168, 75, 0.2);
+            border-color: var(--gold-rich);
         }
 
         /* ===== 摇签页 ===== */
@@ -308,10 +337,11 @@
 
         .qian-container {
             position: relative;
-            width: 140px;
-            height: 220px;
-            margin-bottom: 2rem;
+            width: 160px;
+            height: 260px;
+            margin-bottom: 1.5rem;
             cursor: pointer;
+            -webkit-tap-highlight-color: transparent;
         }
 
         /* 签筒 */
@@ -320,243 +350,292 @@
             bottom: 0;
             left: 50%;
             transform: translateX(-50%);
-            width: 100px;
-            height: 140px;
-            background: linear-gradient(180deg, #8B5E34 0%, #6B4423 40%, #4A2F17 100%);
-            border-radius: 8px 8px 12px 12px;
+            width: 120px;
+            height: 160px;
+            background: linear-gradient(90deg, 
+                #5D3A1A 0%, 
+                #8B5E34 15%, 
+                #A67B52 50%, 
+                #8B5E34 85%, 
+                #5D3A1A 100%);
+            border-radius: 10px 10px 15px 15px;
             box-shadow: 
-                inset -8px 0 15px rgba(0, 0, 0, 0.3),
-                inset 8px 0 15px rgba(255, 255, 255, 0.1),
-                0 8px 25px rgba(0, 0, 0, 0.4);
-            overflow: hidden;
+                0 10px 30px rgba(0, 0, 0, 0.5),
+                inset 0 -10px 20px rgba(0, 0, 0, 0.3);
+            overflow: visible;
         }
 
+        /* 签筒顶部边缘 */
         .qian-tong::before {
             content: '';
             position: absolute;
-            top: 0;
+            top: -5px;
             left: 50%;
             transform: translateX(-50%);
-            width: 110px;
-            height: 15px;
-            background: linear-gradient(180deg, #A0522D 0%, #8B4513 100%);
+            width: 130px;
+            height: 18px;
+            background: linear-gradient(180deg, #A67B52, #8B5E34);
             border-radius: 50%;
-            box-shadow: 0 2px 8px rgba(0, 0, 0, 0.3);
+            box-shadow: 0 3px 10px rgba(0, 0, 0, 0.4);
         }
 
-        /* 金色装饰带 */
-        .tong-band {
+        /* 金色装饰环 */
+        .tong-ring {
             position: absolute;
-            left: 0;
-            right: 0;
-            height: 12px;
-            background: linear-gradient(180deg, var(--gold-light), var(--gold-rich), var(--gold-light));
-            box-shadow: 0 1px 3px rgba(0, 0, 0, 0.3);
+            left: -5px;
+            right: -5px;
+            height: 18px;
+            background: linear-gradient(180deg, 
+                var(--gold-light) 0%, 
+                var(--gold-rich) 30%,
+                var(--gold-dark) 50%,
+                var(--gold-rich) 70%,
+                var(--gold-light) 100%);
+            border: 1px solid var(--gold-dark);
+            box-shadow: 
+                0 2px 5px rgba(0, 0, 0, 0.3),
+                inset 0 1px 0 rgba(255, 255, 255, 0.3);
         }
 
-        .tong-band.top { top: 25px; }
-        .tong-band.bottom { bottom: 20px; }
+        .tong-ring.top { top: 20px; }
+        .tong-ring.bottom { bottom: 25px; }
 
-        /* 签筒上的字 */
-        .tong-text {
+        /* 签筒上的装饰纹 */
+        .tong-pattern {
             position: absolute;
             top: 50%;
             left: 50%;
             transform: translate(-50%, -50%);
+            width: 70px;
+            height: 70px;
+            border: 2px solid var(--gold-line);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .tong-pattern::before {
+            content: '';
+            position: absolute;
+            width: 80px;
+            height: 80px;
+            border: 1px solid var(--gold-line-light);
+            transform: rotate(45deg);
+        }
+
+        .tong-text {
             font-family: 'Ma Shan Zheng', cursive;
-            font-size: 1.8rem;
+            font-size: 1.6rem;
             color: var(--gold-light);
-            writing-mode: vertical-rl;
-            letter-spacing: 0.2em;
-            text-shadow: 0 1px 3px rgba(0, 0, 0, 0.5);
+            text-shadow: 0 2px 4px rgba(0, 0, 0, 0.5);
+            letter-spacing: 0.1em;
         }
 
         /* 签子 */
         .qian-sticks {
             position: absolute;
-            top: 0;
+            top: 10px;
             left: 50%;
             transform: translateX(-50%);
             display: flex;
-            gap: 4px;
-            transition: transform 0.1s ease;
+            gap: 5px;
         }
 
         .qian-sticks.shaking {
-            animation: stickShake 0.1s ease-in-out infinite;
+            animation: stickShake 0.08s ease-in-out infinite;
         }
 
         @keyframes stickShake {
             0%, 100% { transform: translateX(-50%) rotate(0deg); }
-            25% { transform: translateX(-50%) rotate(-6deg); }
-            75% { transform: translateX(-50%) rotate(6deg); }
+            25% { transform: translateX(-50%) rotate(-8deg); }
+            75% { transform: translateX(-50%) rotate(8deg); }
         }
 
         .stick {
-            width: 8px;
-            height: 100px;
-            background: linear-gradient(180deg, #FFE4B5 0%, #DEB887 30%, #D2691E 100%);
-            border-radius: 3px 3px 1px 1px;
-            box-shadow: 1px 0 2px rgba(0, 0, 0, 0.2);
+            width: 10px;
+            border-radius: 4px 4px 2px 2px;
+            background: linear-gradient(180deg, 
+                var(--red-primary) 0%, 
+                var(--red-deep) 15%,
+                #FFE4B5 15%,
+                #DEB887 50%, 
+                #D2691E 100%);
+            box-shadow: 1px 0 3px rgba(0, 0, 0, 0.3);
+            position: relative;
         }
 
-        .stick:nth-child(1) { height: 95px; transform: rotate(-8deg); }
-        .stick:nth-child(2) { height: 105px; transform: rotate(-3deg); }
-        .stick:nth-child(3) { height: 100px; transform: rotate(2deg); }
-        .stick:nth-child(4) { height: 98px; transform: rotate(6deg); }
-        .stick:nth-child(5) { height: 102px; transform: rotate(10deg); }
+        .stick:nth-child(1) { height: 110px; transform: rotate(-10deg) translateY(5px); }
+        .stick:nth-child(2) { height: 120px; transform: rotate(-4deg); }
+        .stick:nth-child(3) { height: 115px; transform: rotate(2deg) translateY(3px); }
+        .stick:nth-child(4) { height: 118px; transform: rotate(7deg) translateY(1px); }
+        .stick:nth-child(5) { height: 112px; transform: rotate(12deg) translateY(6px); }
 
-        /* 红色签头 */
-        .stick::before {
-            content: '';
-            position: absolute;
-            top: 0;
-            left: 0;
-            right: 0;
-            height: 20px;
-            background: linear-gradient(180deg, var(--red-primary), var(--red-deep));
-            border-radius: 3px 3px 0 0;
-        }
-
-        .shake-hint {
-            font-family: 'Noto Serif SC', serif;
-            font-size: 0.95rem;
+        .shake-text {
+            font-family: 'Ma Shan Zheng', cursive;
+            font-size: 1.4rem;
             color: var(--gold-light);
-            letter-spacing: 0.4em;
-            opacity: 0.9;
+            letter-spacing: 0.3em;
+            margin-bottom: 0.3rem;
         }
 
         .shake-sub {
+            font-family: 'Noto Serif SC', serif;
             font-size: 0.8rem;
             color: var(--text-on-red);
-            opacity: 0.6;
-            margin-top: 0.5rem;
-            letter-spacing: 0.1em;
+            opacity: 0.7;
+            letter-spacing: 0.15em;
         }
 
         /* ===== 结果页 ===== */
         .result-page {
-            padding: 1.5rem;
+            padding: 2rem 1.5rem;
             overflow-y: auto;
         }
 
         .result-card {
             width: 100%;
-            max-width: 320px;
+            max-width: 300px;
             background: var(--cream-bg);
-            border: 2px solid var(--gold-rich);
-            padding: 0;
             position: relative;
             color: var(--red-deep);
+            box-shadow: 0 10px 40px rgba(0, 0, 0, 0.3);
         }
 
-        /* 顶部装饰 */
-        .result-top-deco {
-            background: var(--red-primary);
-            padding: 1rem;
-            text-align: center;
-            position: relative;
+        /* 结果卡片复杂边框 */
+        .result-frame {
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            border: 4px solid var(--red-primary);
+            pointer-events: none;
         }
 
-        .result-top-deco::after {
+        .result-frame::before {
             content: '';
             position: absolute;
-            bottom: 0;
+            top: 4px;
+            left: 4px;
+            right: 4px;
+            bottom: 4px;
+            border: 2px solid var(--gold-rich);
+        }
+
+        .result-frame::after {
+            content: '';
+            position: absolute;
+            top: 10px;
+            left: 10px;
+            right: 10px;
+            bottom: 10px;
+            border: 1px solid var(--gold-line);
+        }
+
+        /* 顶部装饰带 */
+        .result-header {
+            background: var(--red-primary);
+            padding: 0.8rem;
+            text-align: center;
+            position: relative;
+            margin: 12px 12px 0 12px;
+        }
+
+        .result-header::after {
+            content: '';
+            position: absolute;
+            bottom: -8px;
             left: 0;
             right: 0;
             height: 8px;
-            background: linear-gradient(180deg, var(--gold-rich), var(--gold-light), var(--gold-rich));
+            background: linear-gradient(180deg, var(--gold-rich), var(--gold-light));
         }
 
         .result-label {
             font-family: 'Noto Sans SC', sans-serif;
-            font-size: 0.75rem;
+            font-size: 0.7rem;
             color: var(--gold-light);
-            letter-spacing: 0.4em;
+            letter-spacing: 0.5em;
         }
 
         .result-body {
             padding: 1.5rem;
-        }
-
-        .sign-name-container {
-            text-align: center;
-            margin-bottom: 1.5rem;
+            margin: 0 12px 12px 12px;
         }
 
         .sign-name {
             font-family: 'Ma Shan Zheng', cursive;
-            font-size: clamp(2.5rem, 12vw, 3.5rem);
+            font-size: clamp(2.2rem, 10vw, 3rem);
             font-weight: 400;
             color: var(--red-deep);
+            text-align: center;
             letter-spacing: 0.2em;
             line-height: 1.2;
+            margin-bottom: 1rem;
         }
 
-        .result-divider {
+        .result-ornate-divider {
             display: flex;
             align-items: center;
             justify-content: center;
-            gap: 0.6rem;
-            margin: 1.2rem 0;
+            gap: 0.4rem;
+            margin: 1rem 0;
         }
 
-        .divider-line {
-            width: 25px;
-            height: 1px;
+        .result-ornate-divider .line {
+            width: 20px;
+            height: 2px;
             background: var(--red-primary);
-            opacity: 0.4;
         }
 
-        .divider-icon {
+        .result-ornate-divider .diamond {
             width: 8px;
             height: 8px;
-            border: 1px solid var(--red-primary);
+            border: 2px solid var(--red-primary);
             transform: rotate(45deg);
-            opacity: 0.6;
         }
 
         .blessing-text {
             font-family: 'Noto Serif SC', serif;
-            font-size: 0.95rem;
+            font-size: 0.9rem;
             font-weight: 400;
             line-height: 2;
             color: var(--ink-black);
             text-align: center;
             letter-spacing: 0.05em;
-            margin-bottom: 1.2rem;
+            margin-bottom: 1rem;
         }
 
         .keywords {
             display: flex;
             justify-content: center;
-            gap: 0.8rem;
+            gap: 0.5rem;
             flex-wrap: wrap;
-            margin-bottom: 1.2rem;
+            margin-bottom: 1rem;
         }
 
         .keyword {
             font-family: 'Noto Serif SC', serif;
-            font-size: 0.8rem;
+            font-size: 0.75rem;
             color: var(--red-deep);
-            padding: 0.4rem 0.8rem;
-            border: 1px solid var(--red-primary);
-            opacity: 0.9;
-            letter-spacing: 0.1em;
+            padding: 0.35rem 0.7rem;
+            border: 1.5px solid var(--red-primary);
+            letter-spacing: 0.08em;
         }
 
         .tips-section {
             background: var(--cream-dark);
-            padding: 1rem;
-            border-top: 1px solid rgba(164, 22, 33, 0.15);
+            padding: 0.8rem;
+            border: 1px solid var(--gold-line);
         }
 
         .tips-title {
-            font-size: 0.7rem;
+            font-size: 0.65rem;
             color: var(--red-primary);
-            letter-spacing: 0.2em;
-            margin-bottom: 0.6rem;
+            letter-spacing: 0.3em;
+            margin-bottom: 0.5rem;
             text-align: center;
+            font-weight: 500;
         }
 
         .tips-list {
@@ -564,26 +643,25 @@
         }
 
         .tips-list li {
-            font-size: 0.8rem;
+            font-size: 0.75rem;
             color: var(--ink-black);
-            padding: 0.3rem 0;
+            padding: 0.25rem 0;
             text-align: center;
-            opacity: 0.8;
-            letter-spacing: 0.03em;
+            opacity: 0.85;
         }
 
         .result-actions {
             display: flex;
-            border-top: 1px solid var(--gold-rich);
+            margin: 0 12px 12px 12px;
+            border: 2px solid var(--gold-rich);
         }
 
         .action-btn {
             flex: 1;
-            padding: 1rem;
-            font-family: 'Noto Sans SC', sans-serif;
-            font-size: 0.85rem;
-            font-weight: 400;
-            letter-spacing: 0.15em;
+            padding: 0.8rem;
+            font-family: 'Ma Shan Zheng', cursive;
+            font-size: 1.1rem;
+            letter-spacing: 0.2em;
             cursor: pointer;
             transition: all 0.3s ease;
             border: none;
@@ -599,96 +677,106 @@
         }
 
         .retry-btn {
-            background: var(--cream-dark);
+            background: var(--gold-light);
             color: var(--red-deep);
-            border-left: 1px solid var(--gold-rich);
+            border-left: 2px solid var(--gold-rich);
         }
 
         .retry-btn:hover {
-            background: var(--gold-light);
+            background: var(--gold-rich);
         }
 
         .restart-link {
             display: block;
             text-align: center;
-            margin-top: 1.2rem;
+            margin-top: 1rem;
             font-size: 0.8rem;
             color: var(--gold-light);
             cursor: pointer;
-            letter-spacing: 0.1em;
-            opacity: 0.7;
-            transition: opacity 0.3s ease;
+            letter-spacing: 0.15em;
+            opacity: 0.8;
         }
 
         .restart-link:hover {
             opacity: 1;
         }
-
-        /* 响应式 */
-        @media (min-width: 768px) {
-            .result-card {
-                max-width: 360px;
-            }
-            .result-body {
-                padding: 2rem;
-            }
-        }
     </style>
 </head>
 <body>
     <div class="bg-pattern"></div>
-    <div class="flow-lines">
-        <div class="flow-line"></div>
-        <div class="flow-line"></div>
-        <div class="flow-line"></div>
-        <div class="flow-line"></div>
+    
+    <!-- 页面边框 -->
+    <div class="page-border"></div>
+    <div class="page-border-inner"></div>
+    
+    <!-- 四角装饰 -->
+    <div class="corner-deco tl">
+        <svg viewBox="0 0 50 50">
+            <path d="M5 50 L5 15 Q5 5 15 5 L50 5" stroke="#D4A84B" stroke-width="3" fill="none"/>
+            <path d="M12 50 L12 22 Q12 12 22 12 L50 12" stroke="#D4A84B" stroke-width="1.5" fill="none"/>
+            <circle cx="8" cy="8" r="3" fill="#D4A84B"/>
+        </svg>
+    </div>
+    <div class="corner-deco tr">
+        <svg viewBox="0 0 50 50">
+            <path d="M5 50 L5 15 Q5 5 15 5 L50 5" stroke="#D4A84B" stroke-width="3" fill="none"/>
+            <path d="M12 50 L12 22 Q12 12 22 12 L50 12" stroke="#D4A84B" stroke-width="1.5" fill="none"/>
+            <circle cx="8" cy="8" r="3" fill="#D4A84B"/>
+        </svg>
+    </div>
+    <div class="corner-deco bl">
+        <svg viewBox="0 0 50 50">
+            <path d="M5 50 L5 15 Q5 5 15 5 L50 5" stroke="#D4A84B" stroke-width="3" fill="none"/>
+            <path d="M12 50 L12 22 Q12 12 22 12 L50 12" stroke="#D4A84B" stroke-width="1.5" fill="none"/>
+            <circle cx="8" cy="8" r="3" fill="#D4A84B"/>
+        </svg>
+    </div>
+    <div class="corner-deco br">
+        <svg viewBox="0 0 50 50">
+            <path d="M5 50 L5 15 Q5 5 15 5 L50 5" stroke="#D4A84B" stroke-width="3" fill="none"/>
+            <path d="M12 50 L12 22 Q12 12 22 12 L50 12" stroke="#D4A84B" stroke-width="1.5" fill="none"/>
+            <circle cx="8" cy="8" r="3" fill="#D4A84B"/>
+        </svg>
     </div>
 
     <!-- 开屏页 -->
     <div class="page landing-page active" id="landing">
         <div class="landing-card">
-            <!-- 四角装饰 -->
-            <div class="card-corner tl">
-                <svg viewBox="0 0 20 20" class="corner-svg">
-                    <path d="M0 20 L0 5 Q0 0 5 0 L20 0" />
-                </svg>
-            </div>
-            <div class="card-corner tr">
-                <svg viewBox="0 0 20 20" class="corner-svg">
-                    <path d="M0 20 L0 5 Q0 0 5 0 L20 0" />
-                </svg>
-            </div>
-            <div class="card-corner bl">
-                <svg viewBox="0 0 20 20" class="corner-svg">
-                    <path d="M0 20 L0 5 Q0 0 5 0 L20 0" />
-                </svg>
-            </div>
-            <div class="card-corner br">
-                <svg viewBox="0 0 20 20" class="corner-svg">
-                    <path d="M0 20 L0 5 Q0 0 5 0 L20 0" />
-                </svg>
-            </div>
-
-            <!-- 顶部装饰 -->
-            <div class="top-deco">
-                <svg viewBox="0 0 80 24">
-                    <path d="M0 12 L15 12 M25 12 L55 12 M65 12 L80 12" stroke="#D4A84B" stroke-width="1" fill="none"/>
-                    <path d="M20 6 L20 18" stroke="#D4A84B" stroke-width="1" fill="none"/>
-                    <path d="M60 6 L60 18" stroke="#D4A84B" stroke-width="1" fill="none"/>
-                    <circle cx="40" cy="12" r="3" fill="#D4A84B"/>
+            <div class="card-frame"></div>
+            
+            <div class="top-ornament">
+                <svg viewBox="0 0 120 40">
+                    <!-- 中间圆形 -->
+                    <circle cx="60" cy="20" r="8" stroke="#D4A84B" stroke-width="2" fill="none"/>
+                    <circle cx="60" cy="20" r="4" fill="#D4A84B"/>
+                    <!-- 左右线条 -->
+                    <path d="M10 20 L45 20" stroke="#D4A84B" stroke-width="2"/>
+                    <path d="M75 20 L110 20" stroke="#D4A84B" stroke-width="2"/>
+                    <!-- 装饰点 -->
+                    <circle cx="15" cy="20" r="2" fill="#D4A84B"/>
+                    <circle cx="105" cy="20" r="2" fill="#D4A84B"/>
+                    <!-- 上下短线 -->
+                    <path d="M50 8 L50 14" stroke="#D4A84B" stroke-width="1.5"/>
+                    <path d="M70 8 L70 14" stroke="#D4A84B" stroke-width="1.5"/>
+                    <path d="M50 26 L50 32" stroke="#D4A84B" stroke-width="1.5"/>
+                    <path d="M70 26 L70 32" stroke="#D4A84B" stroke-width="1.5"/>
                 </svg>
             </div>
 
             <h1 class="main-title">新年解签</h1>
-            <p class="sub-title">乙巳 · 2026</p>
+            <p class="sub-title">丙午 · 2026</p>
 
-            <div class="deco-divider">
-                <span class="deco-line"></span>
-                <span class="deco-diamond"></span>
-                <span class="deco-line"></span>
+            <div class="ornate-divider">
+                <span class="line-thin"></span>
+                <span class="line-thick"></span>
+                <span class="dot"></span>
+                <span class="circle"></span>
+                <span class="dot"></span>
+                <span class="line-thick"></span>
+                <span class="line-thin"></span>
             </div>
 
-            <button class="start-btn" onclick="startQuestions()">开始</button>
+            <button class="start-btn" onclick="startQuestions()">开始求签</button>
         </div>
     </div>
 
@@ -712,7 +800,7 @@
 
     <!-- 摇签页 -->
     <div class="page shake-page" id="shake">
-        <div class="qian-container" id="qianContainer" onclick="startShaking()">
+        <div class="qian-container" id="qianContainer">
             <div class="qian-sticks" id="qianSticks">
                 <div class="stick"></div>
                 <div class="stick"></div>
@@ -721,31 +809,33 @@
                 <div class="stick"></div>
             </div>
             <div class="qian-tong">
-                <div class="tong-band top"></div>
-                <div class="tong-band bottom"></div>
-                <span class="tong-text">求签</span>
+                <div class="tong-ring top"></div>
+                <div class="tong-ring bottom"></div>
+                <div class="tong-pattern">
+                    <span class="tong-text">求签</span>
+                </div>
             </div>
         </div>
-        <p class="shake-hint">点击摇签</p>
+        <p class="shake-text">点击摇签</p>
         <p class="shake-sub">诚心求签 · 必有回响</p>
     </div>
 
     <!-- 结果页 -->
     <div class="page result-page" id="result">
         <div class="result-card">
-            <div class="result-top-deco">
+            <div class="result-frame"></div>
+            
+            <div class="result-header">
                 <p class="result-label">新 年 签</p>
             </div>
             
             <div class="result-body">
-                <div class="sign-name-container">
-                    <h2 class="sign-name" id="signName">马到功成</h2>
-                </div>
+                <h2 class="sign-name" id="signName">马到功成</h2>
 
-                <div class="result-divider">
-                    <span class="divider-line"></span>
-                    <span class="divider-icon"></span>
-                    <span class="divider-line"></span>
+                <div class="result-ornate-divider">
+                    <span class="line"></span>
+                    <span class="diamond"></span>
+                    <span class="line"></span>
                 </div>
                 
                 <p class="blessing-text" id="blessingText">
@@ -778,5 +868,20 @@
     </div>
 
     <script src="app.js"></script>
+    <script>
+        // 摇签点击事件
+        document.getElementById('qianContainer').addEventListener('click', function() {
+            const sticks = document.getElementById('qianSticks');
+            if (sticks.classList.contains('shaking')) return;
+            
+            sticks.classList.add('shaking');
+            
+            setTimeout(function() {
+                sticks.classList.remove('shaking');
+                generateResult();
+                showPage('result');
+            }, 2000);
+        });
+    </script>
 </body>
 </html>
