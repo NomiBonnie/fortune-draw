@@ -333,34 +333,140 @@
         /* ===== 摇签页 ===== */
         .shake-page {
             text-align: center;
-            background: url('shake-bg.jpg') center center / cover no-repeat;
-            justify-content: flex-end;
-            padding-bottom: 8rem;
-        }
-
-        .shake-page::before {
-            content: '';
-            position: absolute;
-            top: 0;
-            left: 0;
-            right: 0;
-            bottom: 0;
-            background: transparent;
-            pointer-events: none;
-        }
-
-        .shake-hint {
-            background: rgba(0, 0, 0, 0.4);
-            backdrop-filter: blur(5px);
-            -webkit-backdrop-filter: blur(5px);
-            padding: 1rem 2rem;
-            border-radius: 30px;
-            border: 1px solid rgba(212, 168, 75, 0.5);
         }
 
         .qian-container {
-            display: none;
+            position: relative;
+            width: 180px;
+            height: 280px;
+            margin-bottom: 1.5rem;
+            cursor: pointer;
+            -webkit-tap-highlight-color: transparent;
         }
+
+        /* 签筒 */
+        .qian-tong {
+            position: absolute;
+            bottom: 0;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 130px;
+            height: 170px;
+            background: linear-gradient(90deg, 
+                var(--red-deep) 0%, 
+                var(--red-primary) 20%, 
+                #E84545 50%, 
+                var(--red-primary) 80%, 
+                var(--red-deep) 100%);
+            border-radius: 12px 12px 18px 18px;
+            box-shadow: 
+                0 10px 30px rgba(0, 0, 0, 0.4),
+                inset 0 -15px 30px rgba(0, 0, 0, 0.2);
+            overflow: visible;
+        }
+
+        /* 签筒顶部边缘 */
+        .qian-tong::before {
+            content: '';
+            position: absolute;
+            top: -6px;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 140px;
+            height: 20px;
+            background: linear-gradient(180deg, var(--red-primary), var(--red-deep));
+            border-radius: 50%;
+            box-shadow: 0 3px 10px rgba(0, 0, 0, 0.3);
+        }
+
+        /* 金色装饰环 */
+        .tong-ring {
+            position: absolute;
+            left: -6px;
+            right: -6px;
+            height: 20px;
+            background: linear-gradient(180deg, 
+                var(--gold-light) 0%, 
+                var(--gold-rich) 30%,
+                var(--gold-dark) 50%,
+                var(--gold-rich) 70%,
+                var(--gold-light) 100%);
+            border: 1px solid var(--gold-dark);
+            box-shadow: 
+                0 2px 8px rgba(0, 0, 0, 0.3),
+                inset 0 1px 0 rgba(255, 255, 255, 0.4);
+        }
+
+        .tong-ring.top { top: 22px; }
+        .tong-ring.bottom { bottom: 28px; }
+
+        /* 签筒上的装饰 */
+        .tong-pattern {
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            width: 75px;
+            height: 75px;
+            border: 2px solid var(--gold-rich);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .tong-pattern::before {
+            content: '';
+            position: absolute;
+            width: 85px;
+            height: 85px;
+            border: 1px solid var(--gold-line);
+            transform: rotate(45deg);
+        }
+
+        .tong-text {
+            font-family: 'Ma Shan Zheng', cursive;
+            font-size: 2rem;
+            color: var(--gold-light);
+            text-shadow: 0 2px 6px rgba(0, 0, 0, 0.5);
+        }
+
+        /* 签子 */
+        .qian-sticks {
+            position: absolute;
+            top: 5px;
+            left: 50%;
+            transform: translateX(-50%);
+            display: flex;
+            gap: 6px;
+        }
+
+        .qian-sticks.shaking {
+            animation: stickShake 0.08s ease-in-out infinite;
+        }
+
+        @keyframes stickShake {
+            0%, 100% { transform: translateX(-50%) rotate(0deg); }
+            25% { transform: translateX(-50%) rotate(-10deg); }
+            75% { transform: translateX(-50%) rotate(10deg); }
+        }
+
+        .stick {
+            width: 12px;
+            border-radius: 5px 5px 2px 2px;
+            background: linear-gradient(180deg, 
+                var(--red-primary) 0%, 
+                var(--red-deep) 18%,
+                #FFE4B5 18%,
+                #DEB887 50%, 
+                #C4A67C 100%);
+            box-shadow: 1px 0 4px rgba(0, 0, 0, 0.25);
+        }
+
+        .stick:nth-child(1) { height: 115px; transform: rotate(-12deg) translateY(8px); }
+        .stick:nth-child(2) { height: 125px; transform: rotate(-5deg); }
+        .stick:nth-child(3) { height: 120px; transform: rotate(2deg) translateY(4px); }
+        .stick:nth-child(4) { height: 122px; transform: rotate(8deg) translateY(2px); }
+        .stick:nth-child(5) { height: 118px; transform: rotate(14deg) translateY(6px); }
 
         .shake-text {
             font-family: 'Ma Shan Zheng', cursive;
@@ -375,8 +481,8 @@
             font-family: 'Noto Serif SC', serif;
             font-size: 0.85rem;
             color: var(--text-on-red);
+            opacity: 0.8;
             letter-spacing: 0.15em;
-            text-shadow: 0 2px 10px rgba(0, 0, 0, 0.5);
         }
 
         /* ===== 结果页 ===== */
@@ -692,11 +798,25 @@
     </div>
 
     <!-- 摇签页 -->
-    <div class="page shake-page" id="shake" onclick="startShakingFromPage()">
-        <div class="shake-hint">
-            <p class="shake-text">点击屏幕摇签</p>
-            <p class="shake-sub">诚心求签 · 必有回响</p>
+    <div class="page shake-page" id="shake">
+        <div class="qian-container" id="qianContainer">
+            <div class="qian-sticks" id="qianSticks">
+                <div class="stick"></div>
+                <div class="stick"></div>
+                <div class="stick"></div>
+                <div class="stick"></div>
+                <div class="stick"></div>
+            </div>
+            <div class="qian-tong">
+                <div class="tong-ring top"></div>
+                <div class="tong-ring bottom"></div>
+                <div class="tong-pattern">
+                    <span class="tong-text">签</span>
+                </div>
+            </div>
         </div>
+        <p class="shake-text">点击摇签</p>
+        <p class="shake-sub">诚心求签 · 必有回响</p>
     </div>
 
     <!-- 结果页 -->
@@ -748,30 +868,19 @@
 
     <script src="app.js"></script>
     <script>
-        // 摇签页点击事件
-        let isShaking = false;
-        function startShakingFromPage() {
-            if (isShaking) return;
-            isShaking = true;
+        // 摇签点击事件
+        document.getElementById('qianContainer').addEventListener('click', function() {
+            const sticks = document.getElementById('qianSticks');
+            if (sticks.classList.contains('shaking')) return;
             
-            // 添加震动效果
-            const shakePage = document.getElementById('shake');
-            shakePage.style.animation = 'pageShake 0.1s ease-in-out 15';
+            sticks.classList.add('shaking');
             
             setTimeout(function() {
-                shakePage.style.animation = '';
-                isShaking = false;
+                sticks.classList.remove('shaking');
                 generateResult();
                 showPage('result');
             }, 1500);
-        }
+        });
     </script>
-    <style>
-        @keyframes pageShake {
-            0%, 100% { transform: translateX(0); }
-            25% { transform: translateX(-3px) rotate(-0.5deg); }
-            75% { transform: translateX(3px) rotate(0.5deg); }
-        }
-    </style>
 </body>
 </html>
