@@ -207,15 +207,23 @@ function showPage(pageId) {
     document.getElementById(pageId).classList.add('active');
 }
 
-// 更新进度点
+// 更新进度
 function updateProgressDots(index) {
     for (let i = 1; i <= 3; i++) {
-        const dot = document.getElementById(`dot${i}`);
-        dot.classList.remove('active', 'completed');
+        const node = document.getElementById(`node${i}`);
+        node.classList.remove('active', 'completed');
         if (i < index + 1) {
-            dot.classList.add('completed');
+            node.classList.add('completed');
         } else if (i === index + 1) {
-            dot.classList.add('active');
+            node.classList.add('active');
+        }
+    }
+    // 更新连接线
+    for (let i = 1; i <= 2; i++) {
+        const seg = document.getElementById(`seg${i}`);
+        seg.classList.remove('active', 'completed');
+        if (i <= index) {
+            seg.classList.add('completed');
         }
     }
 }
