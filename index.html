@@ -9,15 +9,18 @@
     <link href="https://fonts.googleapis.com/css2?family=Ma+Shan+Zheng&family=Noto+Serif+SC:wght@400;600;700&family=Noto+Sans+SC:wght@300;400;500&display=swap" rel="stylesheet">
     <style>
         :root {
-            --ink-black: #1a1a1a;
-            --ink-deep: #0d0d0d;
-            --gold-rich: #C9A227;
-            --gold-light: #E8D48B;
-            --gold-line: rgba(201, 162, 39, 0.4);
-            --gold-line-light: rgba(201, 162, 39, 0.15);
-            --gold-glow: rgba(201, 162, 39, 0.12);
-            --text-primary: #F5F0E8;
-            --text-muted: rgba(245, 240, 232, 0.6);
+            --red-deep: #A31621;
+            --red-primary: #C41E3A;
+            --red-bg: #B91C1C;
+            --gold-rich: #D4A84B;
+            --gold-light: #F0D998;
+            --gold-line: rgba(212, 168, 75, 0.6);
+            --gold-line-light: rgba(212, 168, 75, 0.25);
+            --cream-bg: #FDF8F0;
+            --cream-dark: #F5EDE0;
+            --ink-black: #1a1410;
+            --text-on-red: #FDF8F0;
+            --text-gold: #D4A84B;
         }
 
         * {
@@ -33,8 +36,8 @@
 
         body {
             font-family: 'Noto Sans SC', sans-serif;
-            background: var(--ink-deep);
-            color: var(--text-primary);
+            background: var(--red-bg);
+            color: var(--text-on-red);
             min-height: 100vh;
             min-height: 100dvh;
             display: flex;
@@ -45,75 +48,44 @@
             overflow: hidden;
         }
 
-        /* 背景 */
-        .bg-gradient {
+        /* 背景装饰 - 祥云纹 */
+        .bg-pattern {
             position: fixed;
             top: 0;
             left: 0;
             right: 0;
             bottom: 0;
-            background: radial-gradient(ellipse at 50% 30%, #1a1816 0%, #0d0d0d 70%);
-            z-index: -2;
-        }
-
-        /* 背景大字 */
-        .bg-character {
-            position: fixed;
-            top: 50%;
-            left: 50%;
-            transform: translate(-50%, -50%);
-            font-family: 'Ma Shan Zheng', cursive;
-            font-size: 70vw;
-            color: rgba(255, 255, 255, 0.015);
+            opacity: 0.06;
+            background-image: url("data:image/svg+xml,%3Csvg width='120' height='120' viewBox='0 0 120 120' xmlns='http://www.w3.org/2000/svg'%3E%3Cpath d='M30 60 Q30 40 50 40 Q70 40 70 60 Q70 50 80 50 Q95 50 95 65 Q95 80 80 80 L25 80 Q10 80 10 65 Q10 50 25 50 Q30 50 30 60Z' fill='none' stroke='%23D4A84B' stroke-width='1'/%3E%3C/svg%3E");
+            background-size: 120px 120px;
             pointer-events: none;
-            z-index: -1;
-            line-height: 1;
-            user-select: none;
+            z-index: 0;
         }
 
-        /* 边框装饰线 */
-        .border-frame {
+        /* 金色流线装饰 */
+        .flow-lines {
             position: fixed;
-            top: 1.5rem;
-            left: 1.5rem;
-            right: 1.5rem;
-            bottom: 1.5rem;
-            border: 1px solid var(--gold-line-light);
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
             pointer-events: none;
-            z-index: 1;
+            z-index: 0;
+            overflow: hidden;
         }
 
-        /* 四角装饰 */
-        .corner {
-            position: fixed;
-            width: 24px;
-            height: 24px;
-            z-index: 2;
-            pointer-events: none;
-        }
-
-        .corner::before,
-        .corner::after {
-            content: '';
+        .flow-line {
             position: absolute;
-            background: var(--gold-line);
+            width: 200%;
+            height: 1px;
+            background: linear-gradient(90deg, transparent, var(--gold-line-light), transparent);
+            transform-origin: center;
         }
 
-        .corner-tl { top: 1.5rem; left: 1.5rem; }
-        .corner-tl::before { top: 0; left: 0; width: 24px; height: 1px; }
-        .corner-tl::after { top: 0; left: 0; width: 1px; height: 24px; }
-
-        .corner-tr { top: 1.5rem; right: 1.5rem; }
-        .corner-tr::before { top: 0; right: 0; width: 24px; height: 1px; }
-        .corner-tr::after { top: 0; right: 0; width: 1px; height: 24px; }
-
-        .corner-bl { bottom: 1.5rem; left: 1.5rem; }
-        .corner-bl::before { bottom: 0; left: 0; width: 24px; height: 1px; }
-        .corner-bl::after { bottom: 0; left: 0; width: 1px; height: 24px; }
-
-        .corner-br { bottom: 1.5rem; right: 1.5rem; }
-        .corner-br::before { bottom: 0; right: 0; width: 24px; height: 1px; }
-        .corner-br::after { bottom: 0; right: 0; width: 1px; height: 24px; }
+        .flow-line:nth-child(1) { top: 15%; left: -50%; transform: rotate(-5deg); }
+        .flow-line:nth-child(2) { top: 35%; left: -50%; transform: rotate(3deg); }
+        .flow-line:nth-child(3) { bottom: 30%; left: -50%; transform: rotate(-3deg); }
+        .flow-line:nth-child(4) { bottom: 15%; left: -50%; transform: rotate(5deg); }
 
         /* 页面容器 */
         .page {
@@ -124,10 +96,11 @@
             flex-direction: column;
             align-items: center;
             justify-content: center;
-            padding: 3rem 2rem;
+            padding: 2rem 1.5rem;
             opacity: 0;
             visibility: hidden;
-            transition: opacity 0.6s ease, visibility 0.6s ease;
+            transition: opacity 0.5s ease, visibility 0.5s ease;
+            z-index: 1;
         }
 
         .page.active {
@@ -140,19 +113,80 @@
             text-align: center;
         }
 
-        /* 标题装饰线 */
-        .title-deco {
+        .landing-card {
+            position: relative;
+            padding: 3rem 2.5rem;
+            background: linear-gradient(180deg, rgba(180, 25, 25, 0.4) 0%, rgba(140, 20, 20, 0.6) 100%);
+            border: 1px solid var(--gold-line);
+        }
+
+        /* 卡片四角装饰 */
+        .card-corner {
+            position: absolute;
+            width: 20px;
+            height: 20px;
+        }
+
+        .card-corner svg {
+            width: 100%;
+            height: 100%;
+        }
+
+        .card-corner.tl { top: -1px; left: -1px; }
+        .card-corner.tr { top: -1px; right: -1px; transform: rotate(90deg); }
+        .card-corner.bl { bottom: -1px; left: -1px; transform: rotate(-90deg); }
+        .card-corner.br { bottom: -1px; right: -1px; transform: rotate(180deg); }
+
+        .corner-svg {
+            fill: none;
+            stroke: var(--gold-rich);
+            stroke-width: 1.5;
+        }
+
+        /* 顶部装饰 */
+        .top-deco {
+            margin-bottom: 1.5rem;
+        }
+
+        .top-deco svg {
+            width: 80px;
+            height: 24px;
+        }
+
+        .main-title {
+            font-family: 'Ma Shan Zheng', cursive;
+            font-size: clamp(3rem, 14vw, 5rem);
+            font-weight: 400;
+            color: var(--gold-light);
+            text-shadow: 0 2px 20px rgba(212, 168, 75, 0.3);
+            margin-bottom: 0.3rem;
+            letter-spacing: 0.15em;
+            line-height: 1.2;
+        }
+
+        .sub-title {
+            font-family: 'Noto Serif SC', serif;
+            font-size: 0.9rem;
+            font-weight: 400;
+            color: var(--gold-rich);
+            letter-spacing: 0.5em;
+            margin-bottom: 2rem;
+            opacity: 0.9;
+        }
+
+        /* 装饰分隔线 */
+        .deco-divider {
             display: flex;
             align-items: center;
             justify-content: center;
-            gap: 1.5rem;
-            margin-bottom: 1rem;
+            gap: 0.8rem;
+            margin-bottom: 2rem;
         }
 
         .deco-line {
             width: 40px;
             height: 1px;
-            background: linear-gradient(90deg, transparent, var(--gold-line), transparent);
+            background: var(--gold-line);
         }
 
         .deco-diamond {
@@ -162,101 +196,53 @@
             transform: rotate(45deg);
         }
 
-        .main-title {
-            font-family: 'Ma Shan Zheng', cursive;
-            font-size: clamp(3.5rem, 15vw, 6rem);
-            font-weight: 400;
-            color: var(--gold-light);
-            text-shadow: 0 0 60px rgba(232, 212, 139, 0.3);
-            margin-bottom: 0.5rem;
-            letter-spacing: 0.2em;
-            line-height: 1.2;
-        }
-
-        .sub-title {
-            font-family: 'Noto Serif SC', serif;
-            font-size: clamp(0.85rem, 2.5vw, 1rem);
-            font-weight: 400;
-            color: var(--text-muted);
-            letter-spacing: 0.6em;
-            margin-bottom: 3.5rem;
-        }
-
-        /* 标题下方装饰 */
-        .title-underline {
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            gap: 0.8rem;
-            margin-bottom: 3.5rem;
-        }
-
-        .underline-segment {
-            height: 1px;
-            background: var(--gold-line);
-        }
-
-        .underline-long { width: 60px; }
-        .underline-short { width: 20px; }
-        .underline-dot {
-            width: 4px;
-            height: 4px;
-            background: var(--gold-rich);
-            border-radius: 50%;
-        }
-
         .start-btn {
-            position: relative;
-            display: inline-flex;
-            align-items: center;
-            justify-content: center;
-            padding: 1.1rem 3rem;
+            padding: 1rem 2.5rem;
             font-family: 'Noto Serif SC', serif;
             font-size: 1rem;
             font-weight: 400;
             letter-spacing: 0.4em;
-            color: var(--ink-deep);
+            color: var(--red-deep);
             background: linear-gradient(135deg, var(--gold-light) 0%, var(--gold-rich) 100%);
             border: none;
             cursor: pointer;
-            transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+            transition: all 0.3s ease;
         }
 
         .start-btn:hover {
             transform: translateY(-2px);
-            box-shadow: 0 10px 40px rgba(201, 162, 39, 0.25);
+            box-shadow: 0 8px 30px rgba(212, 168, 75, 0.3);
         }
 
         /* ===== 问题页 ===== */
         .question-page {
-            padding: 3rem 2rem;
+            padding: 2rem 1.5rem;
         }
 
         .progress-container {
-            margin-bottom: 2.5rem;
+            margin-bottom: 2rem;
         }
 
         .progress-line {
             display: flex;
             align-items: center;
-            gap: 0.5rem;
+            gap: 0.4rem;
         }
 
         .progress-segment {
-            width: 50px;
+            width: 40px;
             height: 1px;
             background: var(--gold-line-light);
             transition: background 0.3s ease;
         }
 
-        .progress-segment.active,
         .progress-segment.completed {
             background: var(--gold-rich);
         }
 
         .progress-node {
-            width: 8px;
-            height: 8px;
+            width: 10px;
+            height: 10px;
             border: 1px solid var(--gold-line-light);
             background: transparent;
             transform: rotate(45deg);
@@ -266,7 +252,7 @@
         .progress-node.active {
             border-color: var(--gold-rich);
             background: var(--gold-rich);
-            box-shadow: 0 0 10px rgba(201, 162, 39, 0.5);
+            box-shadow: 0 0 12px rgba(212, 168, 75, 0.5);
         }
 
         .progress-node.completed {
@@ -276,16 +262,16 @@
 
         .question-card {
             width: 100%;
-            max-width: 340px;
+            max-width: 320px;
             text-align: center;
         }
 
         .question-text {
             font-family: 'Ma Shan Zheng', cursive;
-            font-size: clamp(1.8rem, 7vw, 2.4rem);
+            font-size: clamp(1.8rem, 7vw, 2.2rem);
             font-weight: 400;
-            color: var(--text-primary);
-            margin-bottom: 2.5rem;
+            color: var(--gold-light);
+            margin-bottom: 2rem;
             line-height: 1.5;
             letter-spacing: 0.08em;
         }
@@ -297,38 +283,22 @@
         }
 
         .option-btn {
-            position: relative;
-            padding: 1rem 1.5rem;
-            background: transparent;
+            padding: 0.9rem 1.2rem;
+            background: rgba(0, 0, 0, 0.15);
             border: 1px solid var(--gold-line-light);
             font-family: 'Noto Sans SC', sans-serif;
             font-size: 0.95rem;
             font-weight: 300;
             letter-spacing: 0.08em;
-            color: var(--text-primary);
+            color: var(--text-on-red);
             cursor: pointer;
             transition: all 0.3s ease;
             text-align: center;
         }
 
-        .option-btn::before {
-            content: '';
-            position: absolute;
-            top: -1px;
-            left: -1px;
-            right: -1px;
-            bottom: -1px;
-            border: 1px solid var(--gold-rich);
-            opacity: 0;
-            transition: opacity 0.3s ease;
-        }
-
         .option-btn:hover {
-            background: rgba(201, 162, 39, 0.05);
-        }
-
-        .option-btn:hover::before {
-            opacity: 1;
+            background: rgba(212, 168, 75, 0.15);
+            border-color: var(--gold-line);
         }
 
         /* ===== 摇签页 ===== */
@@ -336,197 +306,257 @@
             text-align: center;
         }
 
-        .shake-container {
+        .qian-container {
             position: relative;
+            width: 140px;
+            height: 220px;
             margin-bottom: 2rem;
+            cursor: pointer;
         }
 
-        /* 摇签装饰框 */
-        .shake-frame {
-            position: relative;
-            padding: 2rem;
+        /* 签筒 */
+        .qian-tong {
+            position: absolute;
+            bottom: 0;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 100px;
+            height: 140px;
+            background: linear-gradient(180deg, #8B5E34 0%, #6B4423 40%, #4A2F17 100%);
+            border-radius: 8px 8px 12px 12px;
+            box-shadow: 
+                inset -8px 0 15px rgba(0, 0, 0, 0.3),
+                inset 8px 0 15px rgba(255, 255, 255, 0.1),
+                0 8px 25px rgba(0, 0, 0, 0.4);
+            overflow: hidden;
         }
 
-        .shake-frame::before {
+        .qian-tong::before {
             content: '';
             position: absolute;
             top: 0;
             left: 50%;
             transform: translateX(-50%);
-            width: 120px;
-            height: 1px;
-            background: linear-gradient(90deg, transparent, var(--gold-line), transparent);
+            width: 110px;
+            height: 15px;
+            background: linear-gradient(180deg, #A0522D 0%, #8B4513 100%);
+            border-radius: 50%;
+            box-shadow: 0 2px 8px rgba(0, 0, 0, 0.3);
         }
 
-        .shake-frame::after {
-            content: '';
+        /* 金色装饰带 */
+        .tong-band {
             position: absolute;
-            bottom: 0;
+            left: 0;
+            right: 0;
+            height: 12px;
+            background: linear-gradient(180deg, var(--gold-light), var(--gold-rich), var(--gold-light));
+            box-shadow: 0 1px 3px rgba(0, 0, 0, 0.3);
+        }
+
+        .tong-band.top { top: 25px; }
+        .tong-band.bottom { bottom: 20px; }
+
+        /* 签筒上的字 */
+        .tong-text {
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            font-family: 'Ma Shan Zheng', cursive;
+            font-size: 1.8rem;
+            color: var(--gold-light);
+            writing-mode: vertical-rl;
+            letter-spacing: 0.2em;
+            text-shadow: 0 1px 3px rgba(0, 0, 0, 0.5);
+        }
+
+        /* 签子 */
+        .qian-sticks {
+            position: absolute;
+            top: 0;
             left: 50%;
             transform: translateX(-50%);
-            width: 120px;
-            height: 1px;
-            background: linear-gradient(90deg, transparent, var(--gold-line), transparent);
-        }
-
-        .shake-character {
-            font-family: 'Ma Shan Zheng', cursive;
-            font-size: clamp(7rem, 30vw, 10rem);
-            color: var(--gold-light);
-            text-shadow: 0 0 80px rgba(232, 212, 139, 0.2);
-            cursor: pointer;
-            user-select: none;
-            line-height: 1;
+            display: flex;
+            gap: 4px;
             transition: transform 0.1s ease;
         }
 
-        .shake-character.shaking {
-            animation: gentleShake 0.12s ease-in-out infinite;
+        .qian-sticks.shaking {
+            animation: stickShake 0.1s ease-in-out infinite;
         }
 
-        @keyframes gentleShake {
-            0%, 100% { transform: rotate(0deg); }
-            25% { transform: rotate(-4deg); }
-            75% { transform: rotate(4deg); }
+        @keyframes stickShake {
+            0%, 100% { transform: translateX(-50%) rotate(0deg); }
+            25% { transform: translateX(-50%) rotate(-6deg); }
+            75% { transform: translateX(-50%) rotate(6deg); }
+        }
+
+        .stick {
+            width: 8px;
+            height: 100px;
+            background: linear-gradient(180deg, #FFE4B5 0%, #DEB887 30%, #D2691E 100%);
+            border-radius: 3px 3px 1px 1px;
+            box-shadow: 1px 0 2px rgba(0, 0, 0, 0.2);
+        }
+
+        .stick:nth-child(1) { height: 95px; transform: rotate(-8deg); }
+        .stick:nth-child(2) { height: 105px; transform: rotate(-3deg); }
+        .stick:nth-child(3) { height: 100px; transform: rotate(2deg); }
+        .stick:nth-child(4) { height: 98px; transform: rotate(6deg); }
+        .stick:nth-child(5) { height: 102px; transform: rotate(10deg); }
+
+        /* 红色签头 */
+        .stick::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            height: 20px;
+            background: linear-gradient(180deg, var(--red-primary), var(--red-deep));
+            border-radius: 3px 3px 0 0;
         }
 
         .shake-hint {
             font-family: 'Noto Serif SC', serif;
-            font-size: 0.9rem;
-            color: var(--text-muted);
-            letter-spacing: 0.5em;
+            font-size: 0.95rem;
+            color: var(--gold-light);
+            letter-spacing: 0.4em;
+            opacity: 0.9;
+        }
+
+        .shake-sub {
+            font-size: 0.8rem;
+            color: var(--text-on-red);
+            opacity: 0.6;
+            margin-top: 0.5rem;
+            letter-spacing: 0.1em;
         }
 
         /* ===== 结果页 ===== */
         .result-page {
-            padding: 2rem 1.5rem;
+            padding: 1.5rem;
             overflow-y: auto;
         }
 
         .result-card {
             width: 100%;
             max-width: 320px;
-            background: linear-gradient(180deg, rgba(25, 22, 18, 0.98) 0%, rgba(18, 16, 14, 0.99) 100%);
-            border: 1px solid var(--gold-line-light);
-            padding: 2rem 1.5rem;
+            background: var(--cream-bg);
+            border: 2px solid var(--gold-rich);
+            padding: 0;
+            position: relative;
+            color: var(--red-deep);
+        }
+
+        /* 顶部装饰 */
+        .result-top-deco {
+            background: var(--red-primary);
+            padding: 1rem;
+            text-align: center;
             position: relative;
         }
 
-        /* 结果卡片四角 */
-        .result-card::before {
+        .result-top-deco::after {
             content: '';
             position: absolute;
-            top: -1px;
-            left: 50%;
-            transform: translateX(-50%);
-            width: 60%;
-            height: 1px;
-            background: linear-gradient(90deg, transparent, var(--gold-rich), transparent);
+            bottom: 0;
+            left: 0;
+            right: 0;
+            height: 8px;
+            background: linear-gradient(180deg, var(--gold-rich), var(--gold-light), var(--gold-rich));
         }
 
-        .result-card::after {
-            content: '';
-            position: absolute;
-            bottom: -1px;
-            left: 50%;
-            transform: translateX(-50%);
-            width: 60%;
-            height: 1px;
-            background: linear-gradient(90deg, transparent, var(--gold-rich), transparent);
-        }
-
-        .result-header {
-            text-align: center;
-            margin-bottom: 1.5rem;
-            padding-bottom: 1.5rem;
-            border-bottom: 1px solid var(--gold-line-light);
-        }
-
-        .sign-label {
+        .result-label {
             font-family: 'Noto Sans SC', sans-serif;
             font-size: 0.75rem;
-            font-weight: 300;
-            color: var(--gold-rich);
-            letter-spacing: 0.3em;
-            margin-bottom: 0.8rem;
+            color: var(--gold-light);
+            letter-spacing: 0.4em;
+        }
+
+        .result-body {
+            padding: 1.5rem;
+        }
+
+        .sign-name-container {
+            text-align: center;
+            margin-bottom: 1.5rem;
         }
 
         .sign-name {
             font-family: 'Ma Shan Zheng', cursive;
-            font-size: clamp(2.2rem, 10vw, 3rem);
+            font-size: clamp(2.5rem, 12vw, 3.5rem);
             font-weight: 400;
-            color: var(--gold-light);
-            text-shadow: 0 0 40px rgba(232, 212, 139, 0.2);
-            letter-spacing: 0.25em;
-            line-height: 1.3;
+            color: var(--red-deep);
+            letter-spacing: 0.2em;
+            line-height: 1.2;
         }
 
-        .result-section {
-            margin-bottom: 1.5rem;
+        .result-divider {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 0.6rem;
+            margin: 1.2rem 0;
+        }
+
+        .divider-line {
+            width: 25px;
+            height: 1px;
+            background: var(--red-primary);
+            opacity: 0.4;
+        }
+
+        .divider-icon {
+            width: 8px;
+            height: 8px;
+            border: 1px solid var(--red-primary);
+            transform: rotate(45deg);
+            opacity: 0.6;
         }
 
         .blessing-text {
             font-family: 'Noto Serif SC', serif;
             font-size: 0.95rem;
             font-weight: 400;
-            line-height: 2.2;
-            color: var(--text-primary);
+            line-height: 2;
+            color: var(--ink-black);
             text-align: center;
-            letter-spacing: 0.08em;
-        }
-
-        /* 装饰分隔线 */
-        .section-divider {
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            gap: 1rem;
-            margin: 1.5rem 0;
-        }
-
-        .divider-line {
-            width: 30px;
-            height: 1px;
-            background: var(--gold-line-light);
-        }
-
-        .divider-dot {
-            width: 4px;
-            height: 4px;
-            background: var(--gold-rich);
-            transform: rotate(45deg);
+            letter-spacing: 0.05em;
+            margin-bottom: 1.2rem;
         }
 
         .keywords {
             display: flex;
             justify-content: center;
-            gap: 1.2rem;
+            gap: 0.8rem;
             flex-wrap: wrap;
+            margin-bottom: 1.2rem;
         }
 
         .keyword {
             font-family: 'Noto Serif SC', serif;
-            font-size: 0.85rem;
-            color: var(--gold-light);
-            letter-spacing: 0.12em;
+            font-size: 0.8rem;
+            color: var(--red-deep);
+            padding: 0.4rem 0.8rem;
+            border: 1px solid var(--red-primary);
             opacity: 0.9;
+            letter-spacing: 0.1em;
         }
 
         .tips-section {
-            padding: 1.2rem;
-            background: rgba(201, 162, 39, 0.03);
-            border: 1px solid var(--gold-line-light);
-            position: relative;
+            background: var(--cream-dark);
+            padding: 1rem;
+            border-top: 1px solid rgba(164, 22, 33, 0.15);
         }
 
-        .tips-section::before {
-            content: '';
-            position: absolute;
-            top: 0;
-            left: 0;
-            width: 3px;
-            height: 100%;
-            background: linear-gradient(180deg, var(--gold-rich), transparent);
+        .tips-title {
+            font-size: 0.7rem;
+            color: var(--red-primary);
+            letter-spacing: 0.2em;
+            margin-bottom: 0.6rem;
+            text-align: center;
         }
 
         .tips-list {
@@ -534,50 +564,48 @@
         }
 
         .tips-list li {
-            font-size: 0.85rem;
-            font-weight: 300;
-            color: var(--text-muted);
-            padding: 0.35rem 0;
-            letter-spacing: 0.05em;
-            line-height: 1.7;
+            font-size: 0.8rem;
+            color: var(--ink-black);
+            padding: 0.3rem 0;
+            text-align: center;
+            opacity: 0.8;
+            letter-spacing: 0.03em;
         }
 
         .result-actions {
             display: flex;
-            gap: 0.8rem;
-            margin-top: 1.8rem;
+            border-top: 1px solid var(--gold-rich);
         }
 
         .action-btn {
             flex: 1;
-            padding: 0.9rem;
+            padding: 1rem;
             font-family: 'Noto Sans SC', sans-serif;
             font-size: 0.85rem;
             font-weight: 400;
-            letter-spacing: 0.2em;
+            letter-spacing: 0.15em;
             cursor: pointer;
             transition: all 0.3s ease;
-        }
-
-        .share-btn {
-            background: var(--gold-rich);
-            color: var(--ink-deep);
             border: none;
         }
 
+        .share-btn {
+            background: var(--red-primary);
+            color: var(--gold-light);
+        }
+
         .share-btn:hover {
-            background: var(--gold-light);
+            background: var(--red-deep);
         }
 
         .retry-btn {
-            background: transparent;
-            color: var(--text-muted);
-            border: 1px solid var(--gold-line-light);
+            background: var(--cream-dark);
+            color: var(--red-deep);
+            border-left: 1px solid var(--gold-rich);
         }
 
         .retry-btn:hover {
-            border-color: var(--gold-line);
-            color: var(--text-primary);
+            background: var(--gold-light);
         }
 
         .restart-link {
@@ -585,62 +613,83 @@
             text-align: center;
             margin-top: 1.2rem;
             font-size: 0.8rem;
-            color: var(--text-muted);
+            color: var(--gold-light);
             cursor: pointer;
-            letter-spacing: 0.15em;
-            transition: color 0.3s ease;
+            letter-spacing: 0.1em;
+            opacity: 0.7;
+            transition: opacity 0.3s ease;
         }
 
         .restart-link:hover {
-            color: var(--gold-rich);
+            opacity: 1;
         }
 
         /* 响应式 */
         @media (min-width: 768px) {
-            .border-frame {
-                top: 2rem;
-                left: 2rem;
-                right: 2rem;
-                bottom: 2rem;
-            }
-            .corner-tl { top: 2rem; left: 2rem; }
-            .corner-tr { top: 2rem; right: 2rem; }
-            .corner-bl { bottom: 2rem; left: 2rem; }
-            .corner-br { bottom: 2rem; right: 2rem; }
             .result-card {
-                padding: 2.5rem 2rem;
+                max-width: 360px;
+            }
+            .result-body {
+                padding: 2rem;
             }
         }
     </style>
 </head>
 <body>
-    <div class="bg-gradient"></div>
-    <div class="bg-character">馬</div>
-    
-    <!-- 边框线 -->
-    <div class="border-frame"></div>
-    <div class="corner corner-tl"></div>
-    <div class="corner corner-tr"></div>
-    <div class="corner corner-bl"></div>
-    <div class="corner corner-br"></div>
+    <div class="bg-pattern"></div>
+    <div class="flow-lines">
+        <div class="flow-line"></div>
+        <div class="flow-line"></div>
+        <div class="flow-line"></div>
+        <div class="flow-line"></div>
+    </div>
 
     <!-- 开屏页 -->
     <div class="page landing-page active" id="landing">
-        <div class="title-deco">
-            <span class="deco-line"></span>
-            <span class="deco-diamond"></span>
-            <span class="deco-line"></span>
+        <div class="landing-card">
+            <!-- 四角装饰 -->
+            <div class="card-corner tl">
+                <svg viewBox="0 0 20 20" class="corner-svg">
+                    <path d="M0 20 L0 5 Q0 0 5 0 L20 0" />
+                </svg>
+            </div>
+            <div class="card-corner tr">
+                <svg viewBox="0 0 20 20" class="corner-svg">
+                    <path d="M0 20 L0 5 Q0 0 5 0 L20 0" />
+                </svg>
+            </div>
+            <div class="card-corner bl">
+                <svg viewBox="0 0 20 20" class="corner-svg">
+                    <path d="M0 20 L0 5 Q0 0 5 0 L20 0" />
+                </svg>
+            </div>
+            <div class="card-corner br">
+                <svg viewBox="0 0 20 20" class="corner-svg">
+                    <path d="M0 20 L0 5 Q0 0 5 0 L20 0" />
+                </svg>
+            </div>
+
+            <!-- 顶部装饰 -->
+            <div class="top-deco">
+                <svg viewBox="0 0 80 24">
+                    <path d="M0 12 L15 12 M25 12 L55 12 M65 12 L80 12" stroke="#D4A84B" stroke-width="1" fill="none"/>
+                    <path d="M20 6 L20 18" stroke="#D4A84B" stroke-width="1" fill="none"/>
+                    <path d="M60 6 L60 18" stroke="#D4A84B" stroke-width="1" fill="none"/>
+                    <circle cx="40" cy="12" r="3" fill="#D4A84B"/>
+                </svg>
+            </div>
+
+            <h1 class="main-title">新年解签</h1>
+            <p class="sub-title">乙巳 · 2026</p>
+
+            <div class="deco-divider">
+                <span class="deco-line"></span>
+                <span class="deco-diamond"></span>
+                <span class="deco-line"></span>
+            </div>
+
+            <button class="start-btn" onclick="startQuestions()">开始</button>
         </div>
-        <h1 class="main-title">新年解签</h1>
-        <p class="sub-title">乙巳 · 2026</p>
-        <div class="title-underline">
-            <span class="underline-segment underline-long"></span>
-            <span class="underline-dot"></span>
-            <span class="underline-segment underline-short"></span>
-            <span class="underline-dot"></span>
-            <span class="underline-segment underline-long"></span>
-        </div>
-        <button class="start-btn" onclick="startQuestions()">开始</button>
     </div>
 
     <!-- 问题页 -->
@@ -663,64 +712,69 @@
 
     <!-- 摇签页 -->
     <div class="page shake-page" id="shake">
-        <div class="shake-container">
-            <div class="shake-frame">
-                <div class="shake-character" id="shakeChar" onclick="startShaking()">籤</div>
+        <div class="qian-container" id="qianContainer" onclick="startShaking()">
+            <div class="qian-sticks" id="qianSticks">
+                <div class="stick"></div>
+                <div class="stick"></div>
+                <div class="stick"></div>
+                <div class="stick"></div>
+                <div class="stick"></div>
+            </div>
+            <div class="qian-tong">
+                <div class="tong-band top"></div>
+                <div class="tong-band bottom"></div>
+                <span class="tong-text">求签</span>
             </div>
         </div>
         <p class="shake-hint">点击摇签</p>
+        <p class="shake-sub">诚心求签 · 必有回响</p>
     </div>
 
     <!-- 结果页 -->
     <div class="page result-page" id="result">
         <div class="result-card">
-            <div class="result-header">
-                <p class="sign-label">新年签</p>
-                <h2 class="sign-name" id="signName">马到功成</h2>
+            <div class="result-top-deco">
+                <p class="result-label">新 年 签</p>
             </div>
             
-            <div class="result-section">
+            <div class="result-body">
+                <div class="sign-name-container">
+                    <h2 class="sign-name" id="signName">马到功成</h2>
+                </div>
+
+                <div class="result-divider">
+                    <span class="divider-line"></span>
+                    <span class="divider-icon"></span>
+                    <span class="divider-line"></span>
+                </div>
+                
                 <p class="blessing-text" id="blessingText">
                     今年的你如骏马奔腾<br>
                     所到之处皆是坦途
                 </p>
-            </div>
 
-            <div class="section-divider">
-                <span class="divider-line"></span>
-                <span class="divider-dot"></span>
-                <span class="divider-line"></span>
-            </div>
-            
-            <div class="result-section">
                 <div class="keywords" id="keywords">
                     <span class="keyword">一马当先</span>
                     <span class="keyword">意外惊喜</span>
                     <span class="keyword">贵人相助</span>
                 </div>
+                
+                <div class="tips-section">
+                    <p class="tips-title">马年提示</p>
+                    <ul class="tips-list" id="tipsList">
+                        <li>三月适合启动新计划</li>
+                        <li>今年的幸运色是金色</li>
+                        <li>遇到属马的人要多留意</li>
+                    </ul>
+                </div>
             </div>
 
-            <div class="section-divider">
-                <span class="divider-line"></span>
-                <span class="divider-dot"></span>
-                <span class="divider-line"></span>
-            </div>
-            
-            <div class="result-section tips-section">
-                <ul class="tips-list" id="tipsList">
-                    <li>三月适合启动新计划</li>
-                    <li>今年的幸运色是金色</li>
-                    <li>遇到属马的人要多留意</li>
-                </ul>
-            </div>
-            
             <div class="result-actions">
-                <button class="action-btn share-btn" onclick="shareResult()">分享</button>
-                <button class="action-btn retry-btn" onclick="retry()">再抽</button>
+                <button class="action-btn share-btn" onclick="shareResult()">分享好运</button>
+                <button class="action-btn retry-btn" onclick="retry()">再抽一签</button>
             </div>
-            
-            <p class="restart-link" onclick="restart()">重新开始</p>
         </div>
+        <p class="restart-link" onclick="restart()">重新开始</p>
     </div>
 
     <script src="app.js"></script>

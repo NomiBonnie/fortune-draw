@@ -269,13 +269,13 @@ function selectOption(questionId, value) {
 
 // 摇签动画
 function startShaking() {
-    const char = document.getElementById('shakeChar');
-    if (char.classList.contains('shaking')) return;
+    const sticks = document.getElementById('qianSticks');
+    if (sticks.classList.contains('shaking')) return;
     
-    char.classList.add('shaking');
+    sticks.classList.add('shaking');
     
     setTimeout(() => {
-        char.classList.remove('shaking');
+        sticks.classList.remove('shaking');
         generateResult();
         showPage('result');
     }, 2000);
