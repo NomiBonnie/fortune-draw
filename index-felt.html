@@ -1,0 +1,597 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+    <title>新年解签 · 2026 🧶</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Ma+Shan+Zheng&family=Noto+Serif+SC:wght@300;400;600&family=Noto+Sans+SC:wght@300;400;500&display=swap" rel="stylesheet">
+    <style>
+        :root {
+            --red-primary: #C62828;
+            --red-light: #EF5350;
+            --red-dark: #8E0000;
+            --gold: #D4AF37;
+            --gold-light: #F0D77B;
+            --gold-dark: #9A7B4F;
+            --cream: #FFFBF5;
+            --warm-bg: #2D1B1B;
+            --text-light: rgba(255, 251, 245, 0.95);
+            --text-muted: rgba(255, 251, 245, 0.7);
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        html, body {
+            height: 100%;
+            overflow: hidden;
+        }
+
+        body {
+            font-family: 'Noto Sans SC', sans-serif;
+            background: linear-gradient(165deg, #3D2424 0%, #2D1B1B 50%, #1F1212 100%);
+            color: var(--text-light);
+            min-height: 100vh;
+            min-height: 100dvh;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            position: relative;
+        }
+
+        /* 页面容器 */
+        .page {
+            position: absolute;
+            width: 100%;
+            height: 100%;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            padding: 2rem;
+            opacity: 0;
+            visibility: hidden;
+            transition: opacity 0.5s ease, visibility 0.5s ease;
+            z-index: 1;
+        }
+
+        .page.active {
+            opacity: 1;
+            visibility: visible;
+        }
+
+        /* ===== 开屏页 ===== */
+        .landing-page {
+            text-align: center;
+            background-image: url('assets/landing-felt.png');
+            background-size: cover;
+            background-position: center;
+        }
+
+        .landing-page::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: linear-gradient(180deg, rgba(45,27,27,0.3) 0%, rgba(45,27,27,0.7) 100%);
+            z-index: 0;
+        }
+
+        .landing-content {
+            position: relative;
+            z-index: 1;
+        }
+
+        .year-label {
+            font-family: 'Noto Serif SC', serif;
+            font-size: 0.75rem;
+            font-weight: 300;
+            letter-spacing: 0.5em;
+            color: var(--gold-light);
+            margin-bottom: 1rem;
+            text-shadow: 0 2px 10px rgba(0,0,0,0.5);
+        }
+
+        .main-title {
+            font-family: 'Ma Shan Zheng', cursive;
+            font-size: clamp(3rem, 14vw, 4.5rem);
+            font-weight: 400;
+            color: var(--text-light);
+            letter-spacing: 0.12em;
+            line-height: 1.2;
+            margin-bottom: 0.5rem;
+            text-shadow: 0 4px 20px rgba(0,0,0,0.4), 0 0 40px rgba(212,175,55,0.2);
+        }
+
+        .sub-title {
+            font-family: 'Noto Serif SC', serif;
+            font-size: 0.7rem;
+            font-weight: 300;
+            color: var(--text-muted);
+            letter-spacing: 0.3em;
+            margin-bottom: 2.5rem;
+        }
+
+        .start-btn {
+            padding: 1rem 2.5rem;
+            font-family: 'Noto Serif SC', serif;
+            font-size: 0.95rem;
+            font-weight: 400;
+            letter-spacing: 0.2em;
+            color: var(--warm-bg);
+            background: linear-gradient(135deg, var(--gold-light) 0%, var(--gold) 50%, var(--gold-dark) 100%);
+            border: none;
+            border-radius: 30px;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            box-shadow: 0 4px 20px rgba(212,175,55,0.4), 0 8px 30px rgba(0,0,0,0.3);
+        }
+
+        .start-btn:hover {
+            transform: translateY(-2px) scale(1.02);
+            box-shadow: 0 6px 25px rgba(212,175,55,0.5), 0 10px 40px rgba(0,0,0,0.4);
+        }
+
+        .footer-text {
+            position: absolute;
+            bottom: 30px;
+            font-family: 'Noto Serif SC', serif;
+            font-size: 0.6rem;
+            color: var(--text-muted);
+            letter-spacing: 0.15em;
+            opacity: 0.6;
+            z-index: 1;
+        }
+
+        /* ===== 问题页 ===== */
+        .question-page {
+            background-image: url('assets/question-bg-felt.png');
+            background-size: cover;
+            background-position: center bottom;
+            padding: 3rem 2rem;
+        }
+
+        .question-page::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: linear-gradient(180deg, rgba(45,27,27,0.85) 0%, rgba(45,27,27,0.6) 60%, rgba(45,27,27,0.4) 100%);
+            z-index: 0;
+        }
+
+        .question-content {
+            position: relative;
+            z-index: 1;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+        }
+
+        .progress {
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            margin-bottom: 2.5rem;
+        }
+
+        .progress-dot {
+            width: 12px;
+            height: 12px;
+            border: 2px solid var(--gold);
+            background: transparent;
+            border-radius: 50%;
+            transition: all 0.3s ease;
+        }
+
+        .progress-dot.active {
+            background: var(--gold);
+            box-shadow: 0 0 15px rgba(212,175,55,0.6);
+        }
+
+        .progress-dot.completed {
+            background: var(--gold);
+            opacity: 0.5;
+        }
+
+        .progress-line {
+            width: 25px;
+            height: 2px;
+            background: var(--gold);
+            opacity: 0.3;
+            border-radius: 1px;
+        }
+
+        .progress-line.completed {
+            opacity: 0.6;
+        }
+
+        .question-card {
+            width: 100%;
+            max-width: 320px;
+            text-align: center;
+            background: rgba(255,255,255,0.05);
+            backdrop-filter: blur(10px);
+            border-radius: 20px;
+            padding: 2rem 1.5rem;
+            border: 1px solid rgba(212,175,55,0.2);
+        }
+
+        .question-number {
+            font-family: 'Noto Serif SC', serif;
+            font-size: 0.65rem;
+            color: var(--gold);
+            letter-spacing: 0.3em;
+            margin-bottom: 0.8rem;
+        }
+
+        .question-text {
+            font-family: 'Ma Shan Zheng', cursive;
+            font-size: clamp(1.6rem, 6vw, 2.2rem);
+            font-weight: 400;
+            color: var(--text-light);
+            margin-bottom: 1.5rem;
+            line-height: 1.4;
+        }
+
+        .options {
+            display: flex;
+            flex-direction: column;
+            gap: 0.6rem;
+        }
+
+        .option-btn {
+            padding: 0.9rem 1rem;
+            background: rgba(212,175,55,0.1);
+            border: 1px solid rgba(212,175,55,0.4);
+            border-radius: 12px;
+            font-family: 'Noto Sans SC', sans-serif;
+            font-size: 0.88rem;
+            letter-spacing: 0.08em;
+            color: var(--text-light);
+            cursor: pointer;
+            transition: all 0.25s ease;
+        }
+
+        .option-btn:hover {
+            background: rgba(212,175,55,0.25);
+            border-color: var(--gold);
+            transform: translateY(-1px);
+        }
+
+        /* ===== 摇签页 ===== */
+        .shake-page {
+            text-align: center;
+            background: radial-gradient(ellipse at center bottom, rgba(139,69,69,0.3) 0%, transparent 60%);
+        }
+
+        .qian-container {
+            position: relative;
+            width: 280px;
+            height: 280px;
+            margin-bottom: 1.5rem;
+            cursor: pointer;
+            -webkit-tap-highlight-color: transparent;
+        }
+
+        .qian-image {
+            width: 100%;
+            height: 100%;
+            object-fit: contain;
+            filter: drop-shadow(0 20px 40px rgba(0,0,0,0.5));
+            transition: transform 0.1s ease;
+        }
+
+        .qian-container.shaking .qian-image {
+            animation: shake 0.08s ease-in-out infinite;
+        }
+
+        @keyframes shake {
+            0%, 100% { transform: rotate(0deg); }
+            25% { transform: rotate(-8deg); }
+            75% { transform: rotate(8deg); }
+        }
+
+        .shake-text {
+            font-family: 'Ma Shan Zheng', cursive;
+            font-size: 1.3rem;
+            color: var(--text-light);
+            letter-spacing: 0.3em;
+            margin-bottom: 0.4rem;
+            text-shadow: 0 2px 10px rgba(0,0,0,0.3);
+        }
+
+        .shake-sub {
+            font-family: 'Noto Serif SC', serif;
+            font-size: 0.65rem;
+            font-weight: 300;
+            color: var(--text-muted);
+            letter-spacing: 0.15em;
+        }
+
+        /* ===== 结果页 ===== */
+        .result-page {
+            padding: 2rem 1.5rem;
+            overflow-y: auto;
+        }
+
+        .result-card {
+            width: 100%;
+            max-width: 320px;
+            background: linear-gradient(180deg, #FFFDF8 0%, #FFF8EE 100%);
+            color: var(--red-primary);
+            padding: 2rem 1.5rem;
+            border-radius: 20px;
+            position: relative;
+            box-shadow: 0 15px 50px rgba(0,0,0,0.4), 0 0 0 4px rgba(212,175,55,0.3);
+        }
+
+        .result-label {
+            font-family: 'Noto Sans SC', sans-serif;
+            font-size: 0.6rem;
+            font-weight: 500;
+            letter-spacing: 0.5em;
+            color: var(--gold-dark);
+            text-align: center;
+            margin-bottom: 0.6rem;
+        }
+
+        .sign-name {
+            font-family: 'Ma Shan Zheng', cursive;
+            font-size: clamp(2.2rem, 10vw, 3rem);
+            font-weight: 400;
+            color: var(--red-primary);
+            text-align: center;
+            letter-spacing: 0.1em;
+            line-height: 1.2;
+            margin-bottom: 0.8rem;
+        }
+
+        .result-divider {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 10px;
+            margin-bottom: 1rem;
+        }
+
+        .result-divider-line {
+            width: 30px;
+            height: 1px;
+            background: linear-gradient(90deg, transparent, var(--gold), transparent);
+        }
+
+        .result-divider-dot {
+            width: 6px;
+            height: 6px;
+            background: var(--gold);
+            border-radius: 50%;
+        }
+
+        .blessing-text {
+            font-family: 'Noto Serif SC', serif;
+            font-size: 0.88rem;
+            font-weight: 300;
+            line-height: 1.9;
+            color: #555;
+            text-align: center;
+            margin-bottom: 1.2rem;
+        }
+
+        .keywords {
+            display: flex;
+            justify-content: center;
+            gap: 0.4rem;
+            flex-wrap: wrap;
+            margin-bottom: 1.2rem;
+        }
+
+        .keyword {
+            font-family: 'Noto Sans SC', sans-serif;
+            font-size: 0.6rem;
+            font-weight: 400;
+            color: var(--red-primary);
+            padding: 0.3rem 0.6rem;
+            background: rgba(198,40,40,0.08);
+            border-radius: 20px;
+            letter-spacing: 0.05em;
+        }
+
+        .tips-section {
+            background: rgba(212,175,55,0.1);
+            border-radius: 12px;
+            padding: 0.8rem;
+            margin-bottom: 1.2rem;
+        }
+
+        .tips-title {
+            font-size: 0.55rem;
+            font-weight: 500;
+            color: var(--gold-dark);
+            letter-spacing: 0.3em;
+            margin-bottom: 0.4rem;
+            text-align: center;
+        }
+
+        .tips-list {
+            list-style: none;
+        }
+
+        .tips-list li {
+            font-size: 0.7rem;
+            color: #666;
+            padding: 0.2rem 0;
+            text-align: center;
+        }
+
+        .tips-list li::before {
+            content: '✦';
+            margin-right: 0.4rem;
+            color: var(--gold);
+            font-size: 0.5rem;
+        }
+
+        .result-actions {
+            display: flex;
+            gap: 0.5rem;
+        }
+
+        .action-btn {
+            flex: 1;
+            padding: 0.75rem;
+            font-family: 'Noto Sans SC', sans-serif;
+            font-size: 0.78rem;
+            font-weight: 400;
+            letter-spacing: 0.12em;
+            cursor: pointer;
+            transition: all 0.25s ease;
+            border: none;
+            border-radius: 10px;
+        }
+
+        .share-btn {
+            background: linear-gradient(135deg, var(--red-light), var(--red-primary));
+            color: white;
+            box-shadow: 0 3px 12px rgba(198,40,40,0.3);
+        }
+
+        .share-btn:hover {
+            transform: translateY(-1px);
+        }
+
+        .retry-btn {
+            background: transparent;
+            color: var(--red-primary);
+            border: 1px solid var(--red-primary);
+        }
+
+        .retry-btn:hover {
+            background: var(--red-primary);
+            color: white;
+        }
+
+        .restart-link {
+            display: block;
+            text-align: center;
+            margin-top: 1.2rem;
+            font-size: 0.65rem;
+            color: var(--gold);
+            cursor: pointer;
+            letter-spacing: 0.12em;
+            opacity: 0.7;
+            transition: opacity 0.2s;
+        }
+
+        .restart-link:hover {
+            opacity: 1;
+        }
+    </style>
+</head>
+<body>
+    <!-- 开屏页 -->
+    <div class="page landing-page active" id="landing">
+        <div class="landing-content">
+            <p class="year-label">丙午年 · 2026</p>
+            <h1 class="main-title">新年解签</h1>
+            <p class="sub-title">FORTUNE TELLING</p>
+            <button class="start-btn" onclick="startQuestions()">开始求签</button>
+        </div>
+        <p class="footer-text">心诚则灵</p>
+    </div>
+
+    <!-- 问题页 -->
+    <div class="page question-page" id="question">
+        <div class="question-content">
+            <div class="progress">
+                <div class="progress-dot active" id="node1"></div>
+                <div class="progress-line" id="seg1"></div>
+                <div class="progress-dot" id="node2"></div>
+                <div class="progress-line" id="seg2"></div>
+                <div class="progress-dot" id="node3"></div>
+            </div>
+            
+            <div class="question-card">
+                <p class="question-number" id="questionNumber">第一问</p>
+                <h2 class="question-text" id="questionText">今年在哪过年</h2>
+                <div class="options" id="optionsContainer"></div>
+            </div>
+        </div>
+    </div>
+
+    <!-- 摇签页 -->
+    <div class="page shake-page" id="shake">
+        <div class="qian-container" id="qianContainer">
+            <img src="assets/qian-tong-felt.png" alt="签筒" class="qian-image">
+        </div>
+        <p class="shake-text">点击摇签</p>
+        <p class="shake-sub">虔心祈愿 · 必有回响</p>
+    </div>
+
+    <!-- 结果页 -->
+    <div class="page result-page" id="result">
+        <div class="result-card">
+            <p class="result-label">新 年 签</p>
+            <h2 class="sign-name" id="signName">马到功成</h2>
+            <div class="result-divider">
+                <div class="result-divider-line"></div>
+                <div class="result-divider-dot"></div>
+                <div class="result-divider-line"></div>
+            </div>
+            <p class="blessing-text" id="blessingText">
+                今年的你如骏马奔腾<br>
+                所到之处皆是坦途
+            </p>
+            <div class="keywords" id="keywords">
+                <span class="keyword">一马当先</span>
+                <span class="keyword">意外惊喜</span>
+                <span class="keyword">贵人相助</span>
+            </div>
+            <div class="tips-section">
+                <p class="tips-title">马年提示</p>
+                <ul class="tips-list" id="tipsList">
+                    <li>三月适合启动新计划</li>
+                    <li>今年的幸运色是金色</li>
+                    <li>遇到属马的人要多留意</li>
+                </ul>
+            </div>
+            <div class="result-actions">
+                <button class="action-btn share-btn" onclick="shareResult()">分享好运</button>
+                <button class="action-btn retry-btn" onclick="retry()">再抽一签</button>
+            </div>
+        </div>
+        <p class="restart-link" onclick="restart()">重新开始</p>
+    </div>
+
+    <script src="app.js"></script>
+    <script>
+        const questionLabels = ['第一问', '第二问', '第三问'];
+        const originalShowQuestion = showQuestion;
+        showQuestion = function(index) {
+            document.getElementById('questionNumber').textContent = questionLabels[index] || '';
+            originalShowQuestion(index);
+        };
+
+        document.getElementById('qianContainer').addEventListener('click', function() {
+            if (this.classList.contains('shaking')) return;
+            
+            this.classList.add('shaking');
+            
+            setTimeout(() => {
+                this.classList.remove('shaking');
+                generateResult();
+                showPage('result');
+            }, 1500);
+        });
+    </script>
+</body>
+</html>
