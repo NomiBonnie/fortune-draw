@@ -272,13 +272,36 @@
         /* ===== 摇签页 ===== */
         .shake-page {
             text-align: center;
-            background: radial-gradient(ellipse at center bottom, rgba(139,69,69,0.3) 0%, transparent 60%);
+            background-image: url('assets/shake-bg.png');
+            background-size: cover;
+            background-position: center;
+        }
+
+        .shake-page::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: radial-gradient(ellipse at center, rgba(26,16,16,0.3) 0%, rgba(26,16,16,0.6) 100%);
+            z-index: 0;
+        }
+
+        .shake-content {
+            position: relative;
+            z-index: 1;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
         }
 
         .qian-container {
             position: relative;
-            width: 280px;
-            height: 280px;
+            width: 65vw;
+            max-width: 320px;
+            height: 65vw;
+            max-height: 320px;
             margin-bottom: 1.5rem;
             cursor: pointer;
             -webkit-tap-highlight-color: transparent;
@@ -288,7 +311,7 @@
             width: 100%;
             height: 100%;
             object-fit: contain;
-            filter: drop-shadow(0 20px 40px rgba(0,0,0,0.5));
+            filter: drop-shadow(0 20px 50px rgba(0,0,0,0.6));
             transition: transform 0.1s ease;
         }
 
@@ -297,9 +320,9 @@
         }
 
         @keyframes shake {
-            0%, 100% { transform: rotate(0deg); }
-            25% { transform: rotate(-8deg); }
-            75% { transform: rotate(8deg); }
+            0%, 100% { transform: rotate(0deg) translateY(0); }
+            25% { transform: rotate(-6deg) translateY(-5px); }
+            75% { transform: rotate(6deg) translateY(-5px); }
         }
 
         .shake-text {
@@ -530,11 +553,13 @@
 
     <!-- 摇签页 -->
     <div class="page shake-page" id="shake">
-        <div class="qian-container" id="qianContainer">
-            <img src="assets/qian-tong-felt.png" alt="签筒" class="qian-image">
+        <div class="shake-content">
+            <div class="qian-container" id="qianContainer">
+                <img src="assets/qian-tong-layer.png" alt="签筒" class="qian-image">
+            </div>
+            <p class="shake-text">点击摇签</p>
+            <p class="shake-sub">虔心祈愿 · 必有回响</p>
         </div>
-        <p class="shake-text">点击摇签</p>
-        <p class="shake-sub">虔心祈愿 · 必有回响</p>
     </div>
 
     <!-- 结果页 -->
